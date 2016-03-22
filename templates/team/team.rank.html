@@ -1,0 +1,26 @@
+<ion-view on-finish-render>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.ranks()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" ng-bind="rank.title"></h1>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="wrap">
+      <table border="0"cellpadding="0"cellspacing="0">
+        <tr ng-repeat="values in rank.data" ng-if="$index==0">
+        <th ng-repeat="value in values track by $index" ng-if="$index==0" ></th>
+        <th ng-repeat="value in values track by $index" ng-if="$index!=0" ng-bind-html="value|trustHtml"></th>
+        </tr>
+        <tr ng-repeat="values in rank.data" ng-if="$index!=0" ng-init="rank_index=$index">
+        <td ng-repeat="value in values track by $index" class="tdd{{$index+1}}" ng-if="$index==0">
+        <span ng-bind="rank_index"></span>
+        </td>
+        <td ng-repeat="value in values track by $index" ng-if="$index!=0" ng-bind-html="value|trustHtml"></td>
+        </tr>
+      </table>
+    </div>
+
+  </ion-content>
+</ion-view>

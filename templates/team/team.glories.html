@@ -1,0 +1,22 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.detail()">
+      <button class="button button-clear icon ion-ios-arrow-left">球队</button>
+    </div>
+    <h1 class="title" >球队荣誉</h1>
+    <div class="buttons buttons-right header-item" on-touch="showNameEdit('',1,0)" ng-if="teamInfo.priv>2">
+      <button class="button button-clear icon ion-ios-plus-outline"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item class="item-icon-right" ng-repeat="glory in glories track by $index" type="item-text-wrap">
+        <h3>{{glory}}</h3>
+        <ion-option-button class="button-positive" on-touch="showNameEdit(glory,2,$index)" ng-if="teamInfo.priv>2">编辑</ion-option-button>
+        <ion-option-button class="button-assertive" on-touch="removeGlory(glory,$index)" ng-if="teamInfo.priv>2">删除</ion-option-button>
+      </ion-item>
+    </ion-list>
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

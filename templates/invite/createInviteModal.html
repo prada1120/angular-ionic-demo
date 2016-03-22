@@ -1,0 +1,87 @@
+
+<div class="modal">
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button  class="button button-clear" ng-click="createInviteModal.hide()">取消</button>
+		</div>
+		<h1 class="title">发起约战</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="sumbitCreateInvite()">确定</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-scroll class="has-header" style="display: inline;">
+
+		<div class="list ">
+			<label class="item item-input">
+				<span class="input-label">约战标题</span>
+				<input class="text_color_888" ng-model="createInviteInfo.title" type="text" placeholder="请输入约战标题">
+			</label>
+			<label class="item item-input item-icon-right">
+				<span class="input-label">项目</span>
+				<input class="background-fff" on-touch="showTypePopup()" disabled type="text" ng-model="createInviteInfo.typeName" placeholder="请选择球队类型">
+				<i class="icon ion-chevron-right icon-accessory" on-touch="showTypePopup()"></i>
+			</label>
+			<div class="item row ">
+				<label class="col" on-touch="createInviteInfo.invite_type=1" ng-class="{'btn-switch-active':createInviteInfo.invite_type==1,'btn-switch':createInviteInfo.invite_type!=1}">约球队</label>
+				<label class="col" on-touch="createInviteInfo.invite_type=2" ng-class="{'btn-switch-active':createInviteInfo.invite_type!=1,'btn-switch':createInviteInfo.invite_type==1}">约个人</label>
+			</div>
+			<label class="item item-input item-select" ng-if="createInviteInfo.invite_type==1">
+				<span class="input-label">选择球队</span>
+				<select ng-model="createInviteInfo.team" ng-options="team.name for team in myTeams">
+				</select>
+			</label>
+			<label class="item item-input item-select">
+				<span class="input-label">约球类型</span>
+				<select ng-model="createInviteInfo.type" ng-options="type for type in inviteTypes">
+				</select>
+			</label>
+		</div>
+		<div class="list ">
+			<!--<label class="item item-input item-icon-right">-->
+				<!--<span class="input-label">打球时间</span>-->
+
+				<!--&lt;!&ndash;<letu-time-picker placeholder="请选择球队创建地点" min-date="minDate" start-date="startDate"  backdrop=true backdrop-click-to-close=false picker-title="选择打球时间" css-class="" ok-text="确定"  callback="timeSelected" button-clicked="vm.cb()" ></letu-time-picker>&ndash;&gt;-->
+			<!--</label>-->
+
+			<div class="item item-input item-icon-right">
+
+				<span class="input-label">打球时间</span>
+				<select class="common-select" ng-model="time.startDay" ng-options="day.value as day.text for day in days"></select>
+				<select class="common-select" ng-model="time.startHours" ng-options="hour for hour in hours" ></select>
+			</div>
+			<label class="item item-input">
+				<span class="input-label">场地</span>
+				<input class=" text_color_888" ng-model="createInviteInfo.address" type="text" placeholder="请输入场地名称">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">费用</span>
+				<input class=" text_color_888" ng-model="createInviteInfo.fee" type="text" placeholder="请输入费用">
+			</label>
+		</div>
+		<div class="list ">
+			<label class="item item-input">
+				<span class="input-label">联系人</span>
+				<input class=" text_color_888" ng-model="createInviteInfo.name" type="text" placeholder="请输入联系人">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">联系电话</span>
+				<input class=" text_color_888" ng-model="createInviteInfo.contact" type="text" placeholder="请输入联系电话">
+			</label>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">备注</span>
+				<textarea rows="8" placeholder="请输入备注名称" ng-model="createInviteInfo.comment"></textarea>
+			</label>
+		</div>
+		<!--<div class="list">-->
+			<!--<label class="item item-input item-icon-right label-name-edit" on-touch="invite()">-->
+				<!--<span class="input-label">邀请</span>-->
+                <!--<span class="head_img">-->
+					<!--<img ng-src="{{sign.user.avatar|imgFilter:200}}" ng-repeat="sign in createInviteInfo.signs">-->
+                <!--</span>-->
+				<!--<i class="text_color_888 icon ion-ios-more"></i>-->
+			<!--</label>-->
+		<!--</div>-->
+
+	</ion-scroll>
+</div>

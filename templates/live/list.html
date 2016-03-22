@@ -1,0 +1,20 @@
+<ion-view on-finish-render>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="tab.find()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title">赛事直播</h1>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+
+    <div class="list" ng-repeat="score in scores" ui-sref="live.detail({tourney_id:score.tourney_id})">
+      <div class="item item-avatar-left">
+        <img src="http://m.letusport.com/img/match_score_logo_{{score.data_type}}.png">
+        <p class="no-margin" ng-bind="score.name"></p>
+        <p class="no-margin">比赛时间:<span ng-bind="score.date"></span></p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

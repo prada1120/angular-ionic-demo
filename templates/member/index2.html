@@ -1,0 +1,88 @@
+<ion-view view-title="用户中心">
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="right">
+      <button class="button button-light button-icon iconfont icon-youjian" on-touch="createTeam()"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="has-header">
+    <div class="user-center-no-login-bg" ng-if="!isLogin">
+      <div class="user-center-no-login" on-touch="showLogin()">
+        <span>登录</span>
+      </div>
+    </div>
+    <div class="list no-margin" ng-if="isLogin">
+      <div class="item item-image item-icon-right" ui-sref="user.edit">
+        <img ng-src="{{user.avatar|imgFilter:200}}" class="avatar_img-70">
+        <h2 class="user-center-name"><span ng-bind="user.real_name"></span>
+          <i class="iconfont  text_color_green" ng-class="{'icon-male':user.user_info.sex!=2,'icon-female':user.user_info.sex==2}"></i>
+        </h2>
+        <p class="user-center-location"><i class="iconfont icon-location text_color_green"></i><span ng-bind="user.user_info.city_str"></span></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+
+      <div class="item row user-center-panel">
+        <div class="col" ui-sref="user.attention()">
+          <p>关注</p>
+          <strong ng-bind="user.attention_num"></strong>
+        </div>
+        <div class="col">
+          <p>约战</p>
+          <strong ng-bind="user.invite_num"></strong>
+        </div>
+        <div class="col">
+          <p>话题</p>
+          <strong ng-bind="user.bbs_num"></strong>
+        </div>
+        <div class="col" ui-sref="user.team()">
+          <p>球队</p>
+          <strong ng-bind="user.team_num"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="list padding">
+      <div class="item item-icon-right margin-bottom-4 padding" onclick="alert('暂未开发，敬请期待 谢谢！')">
+        <div class="Individual-icon-size Individual-icon-one"></div>
+        <span class="img-icon-span Individual-height">他的话题</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <div class="item item-icon-right margin-bottom-4 padding" onclick="alert('暂未开发，敬请期待 谢谢！')">
+        <div class="Individual-icon-size Individual-icon-two"></div>
+        <span class="img-icon-span Individual-height">水平特点</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <!--<div class="item item-icon-right margin-bottom-4 padding" onclick="alert('暂未开发，敬请期待 谢谢！')">-->
+        <!--<div class="Individual-icon-size Individual-icon-two"></div>-->
+        <!--<span class="img-icon-span Individual-height">我的约战</span>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+      <!--</div>-->
+      <!--<div class="item item-icon-right margin-bottom-4 padding" onclick="alert('暂未开发，敬请期待 谢谢！')">-->
+        <!--<div class="Individual-icon-size Individual-icon-three"></div>-->
+        <!--<span class="img-icon-span Individual-height">我的赛事</span>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+      <!--</div>-->
+      <!--<div class="item item-icon-right margin-bottom-4 padding" ui-sref="user.team()">-->
+        <!--<div class="Individual-icon-size Individual-icon-four"></div>-->
+        <!--<span class="img-icon-span Individual-height">我的球队</span>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+      <!--</div>-->
+      <!--<div class="item item-icon-right margin-bottom-4 padding" onclick="alert('暂未开发，敬请期待 谢谢！')">-->
+        <!--<div class="Individual-icon-size Individual-icon-five"></div>-->
+        <!--<span class="img-icon-span Individual-height">我的活动</span>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+      <!--</div>-->
+      <!--<div class="item item-icon-right margin-bottom-4 padding" onclick="alert('暂未开发，敬请期待 谢谢！')">-->
+        <!--<div class="Individual-icon-size Individual-icon-six"></div>-->
+        <!--<span class="img-icon-span Individual-height">我的订单</span>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+      <!--</div>-->
+      <!--<div class="item item-icon-right margin-bottom-4 padding" ui-sref="user.setting">-->
+        <!--<div class="Individual-icon-size Individual-icon-eight"></div>-->
+        <!--<span class="img-icon-span Individual-height">软件设置</span>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+      <!--</div>-->
+    </div>
+  </ion-content>
+  <div class="bar bar-footer dibu bottom_50">
+    <button>关注</button>
+  </div>
+</ion-view>

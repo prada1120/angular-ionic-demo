@@ -1,0 +1,58 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="tab.user()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <div class="tab2">
+      <span class="col col-center" ng-class="{'tab_active':!tab2}" on-touch="tab2=false">
+        参与的活动
+      </span>
+      <span class="col col-center" ng-class="{'tab_active':tab2}" on-touch="tab2=true">
+        创建的活动
+      </span>
+    </div>
+    <h1 class="title tab-title"> </h1>
+  </ion-header-bar>
+  <ion-content class="has-header activity" ng-show="!tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doJoinActivityRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-avatar-left item-activity item-icon-right" collection-repeat="activity in join_activitys" type="item-text-wrap" ui-sref="activity.detail({activity_id:activity.activity_id})">
+        <img reset-img ng-src="{{activity.uavatar|imgFilter:200}}">
+        <h3><span ng-bind="activity.title"></span></h3><span class="baomingzhong" ng-bind="activity.status_str">报名中</span>
+        <p class="activity-size">
+          <span ng-bind="activity.address"></span>&nbsp;|
+          <span ng-bind="activity.num"></span>&nbsp;|
+          <span ng-bind="activity.fee" ></span>
+        </p>
+        <p  class="activity-size">
+          活动时间：<span ng-bind="activity.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span>&nbsp;
+        </p>
+        <i class="icon ion-chevron-right icon-accessory" ></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreJoinActivitys()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_join">
+    </ion-infinite-scroll>
+  </ion-content>
+  <ion-content class="has-header activity" ng-show="tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doCreateActivityRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-avatar-left item-activity item-icon-right" collection-repeat="activity in create_activitys" type="item-text-wrap" ui-sref="activity.detail({activity_id:activity.activity_id})">
+        <img reset-img ng-src="{{activity.uavatar|imgFilter:200}}">
+        <h3><span ng-bind="activity.title"></span></h3><span class="baomingzhong" ng-bind="activity.status_str">报名中</span>
+        <p class="activity-size">
+          <span ng-bind="activity.address"></span>&nbsp;|
+          <span ng-bind="activity.num"></span>&nbsp;|
+          <span ng-bind="activity.fee" ></span>
+        </p>
+        <p  class="activity-size">
+          活动时间：<span ng-bind="activity.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span>&nbsp;
+        </p>
+        <i class="icon ion-chevron-right icon-accessory" ></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreCreateActivitys()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_create">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

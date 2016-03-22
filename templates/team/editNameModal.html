@@ -1,0 +1,27 @@
+<div class="modal">
+
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="editNameModal.hide()">取消</button>
+		</div>
+
+		<h1 class="title" ng-bind="editNameModalParams.title"></h1>
+
+		<div class="buttons">
+			<button class="button button-clear" on-touch="edit()" ng-disabled="editNameModalParams.name==''||!editNameModalParams.ischange">完成</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content scroll="false">
+
+		<div class="padding">
+			<div class="list">
+				<label class="item item-input" >
+					<input ng-model="editNameModalParams.name" ng-trim ng-change="editNameModalParams.ischange=true" >
+				</label>
+			</div>
+		</div>
+
+	</ion-content>
+
+</div>

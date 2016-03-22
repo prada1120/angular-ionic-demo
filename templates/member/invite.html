@@ -1,0 +1,58 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="member.info({member_id:member_id})">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <div class="tab2">
+      <span class="col col-center" ng-class="{'tab_active':!tab2}" on-touch="tab2=false">
+        参与的约战
+      </span>
+      <span class="col col-center" ng-class="{'tab_active':tab2}" on-touch="tab2=true">
+        创建的约战
+      </span>
+    </div>
+    <h1 class="title tab-title"> </h1>
+  </ion-header-bar>
+  <ion-content class="has-header" ng-show="!tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doJoinInviteRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-avatar-left item-activity item-icon-right" collection-repeat="invite in join_invites" type="item-text-wrap" >
+        <img reset-img ng-src="{{invite.uavatar|imgFilter:100}} ">
+        <h3 ui-sref="invite.detail({invite_id:invite.invite_id})"><span class="text_color_blue_icon">[<span  ng-bind="invite.project_name"></span>]</span><span ng-bind="invite.title"></span></h3>
+        <p class="activity-size" ui-sref="invite.detail({invite_id:invite.invite_id})">
+          <span class="text_color_blue_icon">约球队</span>&nbsp;|
+          <span ng-bind="invite.type"></span>&nbsp;|
+          <span ng-bind="invite.fee|bindFilter:'待定'" ></span>
+        </p>
+        <p  class="activity-size" ui-sref="invite.detail({invite_id:invite.invite_id})">
+          <span ng-bind="invite.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span>&nbsp;|<span ng-bind="invite.address"></span>
+        </p>
+        <i class="icon ion-chevron-right icon-accessory" ui-sref="invite.detail({invite_id:invite.invite_id})" ></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreJoinInvites()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_join">
+    </ion-infinite-scroll>
+  </ion-content>
+  <ion-content class="has-header" ng-show="tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doCreateInviteRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-avatar-left item-activity item-icon-right" collection-repeat="invite in create_invites" type="item-text-wrap" >
+        <img reset-img ng-src="{{invite.uavatar|imgFilter:100}} ">
+        <h3 ui-sref="invite.detail({invite_id:invite.invite_id})"><span class="text_color_blue_icon">[<span  ng-bind="invite.project_name"></span>]</span><span ng-bind="invite.title"></span></h3>
+        <p class="activity-size" ui-sref="invite.detail({invite_id:invite.invite_id})">
+          <span class="text_color_blue_icon">约球队</span>&nbsp;|
+          <span ng-bind="invite.type"></span>&nbsp;|
+          <span ng-bind="invite.fee|bindFilter:'待定'" ></span>
+        </p>
+        <p  class="activity-size" ui-sref="invite.detail({invite_id:invite.invite_id})">
+          <span ng-bind="invite.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span>&nbsp;|<span ng-bind="invite.address"></span>
+        </p>
+        <i class="icon ion-chevron-right icon-accessory" ui-sref="invite.detail({invite_id:invite.invite_id})" ></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreCreateInvites()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_create">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

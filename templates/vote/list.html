@@ -1,0 +1,21 @@
+<ion-view on-finish-render>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="tab.find()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" >有奖互动</h1>
+
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+
+    <div class="card" ng-repeat="vote in votes" ui-sref="vote.detail({vote_id:vote.vote_id})">
+      <div class="item item-body no-padding">
+        <img class="full-image vote_thumb" ng-src="{{vote.thumb|imgFilter:500}}">
+        <p class="no-margin" ng-bind="vote.title"></p>
+        <p class="no-margin">活动时间:<span ng-bind="vote.time*1000|date : 'yyyy-MM-dd'"></span>~<span ng-bind="vote.deadline*1000|date : 'yyyy-MM-dd'"></span></p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

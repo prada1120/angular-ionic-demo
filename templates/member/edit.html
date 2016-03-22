@@ -1,0 +1,129 @@
+<ion-view title="我的信息" on-finish-render>
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear button-light icon ion-ios-arrow-left" ui-sref="tab.user()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-clear button-light" on-touch="submitEdit();">确定</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="has-header">
+    <div class="list">
+      <label class="item item-input item-avatar-right ">
+        <img ng-src="{{user.avatar|imgFilter:100}}">
+        <span class="input-label">头像:</span>
+        <input  class="input_uploadAvatar" ngf-resize="{width: 100, height: 100, quality: 0.9}" ngf-select="upload($file,1)" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" type="file">
+      </label>
+      <label class="item item-icon-right label-name-edit" on-touch="showNameEdit(1)">
+        <span>昵称：</span><span ng-bind="user.real_name"></span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">城市:</span>
+        <ionic-city-picker  tag="-" backdrop=true backdrop-click-to-close=false  css-class="city-picker-input" ok-text="确定"  callback="selected" citydata="user.user_info.city_str" citydataforids="user.user_info.citydataforids"  button-clicked="vm.cb()" ></ionic-city-picker>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          性别
+        </div>
+        <select ng-model="user.sex">
+          <option value="2">女</option>
+          <option value="1">男</option>
+          <option value="0">保密</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          年龄
+        </div>
+        <select ng-model="user.user_info.age">
+          <option value="12">12岁</option>
+          <option value="13">13岁</option>
+          <option value="14">14岁</option>
+          <option value="15">15岁</option>
+          <option value="16">16岁</option>
+          <option value="17">17岁</option>
+          <option value="18">18岁</option>
+          <option value="19">19岁</option>
+          <option value="20">20岁</option>
+          <option value="21">21岁</option>
+          <option value="22">22岁</option>
+          <option value="23">23岁</option>
+          <option value="24">24岁</option>
+          <option value="25">25岁</option>
+          <option value="26">26岁</option>
+          <option value="27">27岁</option>
+          <option value="28">28岁</option>
+          <option value="29">29岁</option>
+          <option value="30">30岁</option>
+          <option value="31">31岁</option>
+          <option value="32">32岁</option>
+          <option value="33">33岁</option>
+          <option value="34">34岁</option>
+          <option value="35">35岁</option>
+          <option value="36">36岁</option>
+          <option value="37">37岁</option>
+          <option value="38">38岁</option>
+          <option value="39">39岁</option>
+          <option value="40">40岁</option>
+          <option value="41">41岁</option>
+          <option value="42">42岁</option>
+          <option value="43">43岁</option>
+          <option value="44">44岁</option>
+          <option value="45">45岁</option>
+          <option value="46">46岁</option>
+          <option value="47">47岁</option>
+          <option value="48">48岁</option>
+          <option value="49">49岁</option>
+          <option value="50">50岁</option>
+          <option value="51">51岁</option>
+          <option value="52">52岁</option>
+          <option value="53">53岁</option>
+          <option value="54">54岁</option>
+          <option value="55">55岁</option>
+          <option value="56">56岁</option>
+          <option value="57">57岁</option>
+          <option value="58">58岁</option>
+          <option value="59">59岁</option>
+          <option value="60">60岁</option>
+          <option value="61">61岁</option>
+          <option value="62">62岁</option>
+          <option value="63">63岁</option>
+          <option value="64">64岁</option>
+          <option value="65">65岁</option>
+          <option value="66">66岁</option>
+          <option value="67">67岁</option>
+          <option value="68">68岁</option>
+          <option value="69">69岁</option>
+          <option value="70">70岁</option>
+          <option value="71">71岁</option>
+          <option value="72">72岁</option>
+          <option value="73">73岁</option>
+          <option value="74">74岁</option>
+          <option value="75">75岁</option>
+          <option value="76">76岁</option>
+          <option value="77">77岁</option>
+          <option value="78">78岁</option>
+          <option value="79">79岁</option>
+          <option value="80">80岁</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <div class="input-label">
+          类别
+        </div>
+        <select ng-model="user.user_info.job">
+          <option value="0">业余选手</option>
+          <option value="1">专业球手</option>
+          <option value="2">教练</option>
+          <option value="3">拉拉队员</option>
+        </select>
+      </label>
+      <label class="item item-icon-right label-name-edit" on-touch="editLevel()">
+        <span>水平特点：</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </label>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,29 @@
+<div class="modal">
+
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="showMembersModal.hide()">取消</button>
+		</div>
+
+		<h1 class="title" >选择成员</h1>
+
+		<div class="buttons">
+			<button class="button button-clear" on-touch="onSelected()" >完成</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content >
+
+		<ion-list>
+			<ion-item class="item-avatar item-icon-right" ng-repeat="member in selectMembers" type="item-text-wrap" ng-click="member.is_checked=!member.is_checked">
+				<img ng-src="{{member.uavatar|imgFilter:200}}" >
+				<h3 ng-bind="member.uname"></h3>
+				<p ng-bind="member.job_name"></p>
+				<i class="icon text_color_blue_icon" ng-class="{'ion-ios-checkmark-outline':!member.is_checked,'ion-ios-checkmark':member.is_checked}"></i>
+			</ion-item>
+
+		</ion-list>
+
+	</ion-content>
+
+</div>

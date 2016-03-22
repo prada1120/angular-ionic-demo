@@ -1,0 +1,27 @@
+<div class="modal">
+
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="newReplieModal.hide()">取消</button>
+		</div>
+
+		<h1 class="title">{{ at }}</h1>
+
+		<div class="buttons">
+			<button class="button button-clear" ng-click="addComment()">评论</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content scroll="false">
+
+		<div class="padding">
+			<div class="list">
+				<label class="item item-input" >
+					<textarea id="text"  class="no-resize" rows="12" placeholder="说点啥..." ng-model="replieParams.content"></textarea>
+				</label>
+			</div>
+		</div>
+
+	</ion-content>
+
+</div>

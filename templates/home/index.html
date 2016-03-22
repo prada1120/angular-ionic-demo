@@ -1,0 +1,200 @@
+<ion-view title="首页">
+  <ion-content scroll="false">
+    <tab-slide-box tab="0">
+      <div class="tsb-icons">
+        <div class="tsb-ic-wrp">
+          <ion-scroll direction="x" class="tsb-hscroll">
+            <a href="javascript:;" >赛事</a>
+            <a href="javascript:;" >关注</a>
+            <a href="javascript:;" >球队</a>
+            <a href="javascript:;" >球友</a>
+          </ion-scroll>
+        </div>
+      </div>
+      <ion-slide-box  show-pager="false" on-slide-changed="slideHasChanged($index)">
+        <ion-slide>
+          <ion-scroll style="height:93%">
+            <ion-refresher pulling-text="下拉可以刷新" on-refresh="doDynamicMatchRefresh()">
+            </ion-refresher>
+            <div class="list home">
+              <div ng-repeat="match in matchs">
+                <div class="item margin-top-10 padding_rf_5">
+                  <div class="item-avatar-left no-min-height">
+                    <img ng-src="{{match.avatar|imgFilter:600}}" ng-if="match.data_type==302"  ng-click="jumpUrl('http://m.letusport.com/match/#/{{match.blid}}/{{match.log_data.me_id}}')">
+                    <img ng-src="{{match.avatar|imgFilter:100}}" ng-if="match.data_type!=302"  ng-click="jumpUrl('http://m.letusport.com/match/#/{{match.blid}}/{{match.log_data.me_id}}')">
+                    <a href="http://m.letusport.com/match/#/{{match.blid}}/{{match.log_data.me_id}}">
+                      <h2 ng-bind="match.name"></h2>
+                    </a>
+                    <span class="text_color_grey_12" am-time-ago="match.time*1000"></span>
+                    <span class="text_color_green_12" ng-click="delAttentionDynamic(match,$index)" ng-if="match.is_priv">删除</span>
+                  </div>
+                  <a  href="http://m.letusport.com/match/#/{{match.blid}}/{{match.log_data.me_id}}/news/{{match.data_id}}">
+                  <div class="row">
+                    <p class="home_dynamic"  ng-bind-html="match.title|trustHtml"></p>
+                  </div>
+                  <div class="row no-padding" >
+                    <img class="home-match-img" ng-src="{{match.imgs[0][0]|imgFilter:300}}">
+                  </div>
+                </a>
+                </div>
+              </div>
+            </div>
+            <ion-infinite-scroll on-infinite="loadMoreDynamicMatch()" distance="1%" spinner="dots" ng-if="hasNextPage_match">
+            </ion-infinite-scroll>
+          </ion-scroll>
+        </ion-slide>
+        <ion-slide>
+          <ion-scroll style="height:93%">
+            <ion-refresher pulling-text="下拉可以刷新" on-refresh="doDynamicAttentionRefresh()">
+            </ion-refresher>
+            <div class="list home">
+              <div ng-repeat="attention in attentions">
+                <div class="item margin-top-10 padding_rf_5">
+                  <div class="item-avatar-left no-min-height">
+                    <img ng-src="{{attention.avatar|imgFilter:100}}" ng-click="jumpUrl(attention)">
+                    <h2 ng-bind="attention.name" ng-click="jumpUrl(attention)"></h2>
+                    <span class="text_color_grey_12" am-time-ago="attention.time*1000"></span>
+                    <span class="text_color_green_12" ng-click="delAttentionDynamic(attention,$index)" ng-if="attention.is_priv">删除</span>
+                  </div>
+                  <div ng-if="attention.type!=3">
+                    <div class="row" >
+                      <p class="home_dynamic" jump-params="{id:{{attention.log_id}}}" jump-url="home.dynamic" ng-bind-html="attention.title|trustHtml"></p>
+                    </div>
+                    <div class="row no-padding" ng-repeat="imgs in attention.imgs" ng-if="attention.imgs.length==1">
+                      <div class="col icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,attention.imgs)">
+                        <img ng-src="{{img|imgFilter:300:180:180:7}}" >
+                      </div>
+                    </div>
+                    <div class="row no-padding" ng-repeat="imgs in attention.imgs" ng-if="attention.imgs.length!=1&&$index<3" >
+                      <div class="col col-33 icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,attention.imgs)">
+                        <img ng-src="{{img|imgFilter:300:120:120:6}}" >
+                      </div>
+                    </div>
+                  </div>
+                  <a ng-if="attention.type==3" href="http://m.letusport.com/match/#/{{attention.blid}}/{{attention.log_data.me_id}}/news/{{attention.data_id}}">
+                    <div class="row" >
+                      <p class="home_dynamic" ng-bind-html="attention.title|trustHtml"></p>
+                    </div>
+                    <div class="row no-padding" >
+                      <img class="home-match-img" ng-src="{{attention.imgs[0][0]|imgFilter:300}}">
+                    </div>
+                  </a>
+                </div>
+                <div class="row home-tool-bar" ng-if="attention.type!=3">
+                  <div class="col">
+                    <i class="icon icon-attention icon_color"></i>
+                    <span  ng-bind="attention.views"></span>
+                  </div>
+                  <div class="col" ui-sref="home.dynamic({id:attention.log_id})">
+                    <i class="icon icon-pinglun icon_color"></i>
+                    <span ng-bind="attention.comments"></span>
+                  </div>
+                  <div class="col" ng-click="hitDynamic(attention)">
+                    <i class="icon icon-zan icon_color" ng-class="{'icon-zand':attention.is_hit,'text_color_blue_icon':attention.is_hit}"></i>
+                    <span ng-bind="attention.hits"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ion-infinite-scroll on-infinite="loadMoreDynamicAttention()" distance="1%" spinner="dots" ng-if="hasNextPage_attention">
+            </ion-infinite-scroll>
+          </ion-scroll>
+        </ion-slide>
+        <ion-slide>
+          <ion-scroll style="height:93%">
+            <ion-refresher pulling-text="下拉可以刷新" on-refresh="doDynamicTeamRefresh()">
+            </ion-refresher>
+            <div class="list home">
+              <div ng-repeat="team in teams">
+                <div class="item margin-top-10 padding_rf_5">
+                  <div class="item-avatar-left no-min-height">
+                    <img ng-src="{{team.avatar|imgFilter:100}}" ng-click="jumpUrl(team)">
+                    <h2 ng-bind="team.name" ng-click="jumpUrl(team)"></h2>
+                    <span class="text_color_grey_12" am-time-ago="team.time*1000"></span>
+                    <span class="text_color_green_12" ng-click="delAttentionDynamic(team,$index)" ng-if="team.is_priv">删除</span>
+                  </div>
+                  <div class="row" >
+                    <p class="home_dynamic" jump-params="{id:{{team.log_id}}}" jump-url="home.dynamic" ng-bind-html="team.title|trustHtml"></p>
+                  </div>
+                  <div class="row no-padding" ng-repeat="imgs in team.imgs" ng-if="team.imgs.length==1">
+                    <div class="col icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,team.imgs)">
+                      <img ng-src="{{img|imgFilter:300:180:180:7}}" >
+                    </div>
+                  </div>
+                  <div class="row no-padding" ng-repeat="imgs in team.imgs" ng-if="team.imgs.length!=1&&$index<3" >
+                    <div class="col col-33 icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,team.imgs)">
+                      <img ng-src="{{img|imgFilter:300:120:120:6}}" >
+                    </div>
+                  </div>
+                </div>
+                <div class="row home-tool-bar">
+                  <div class="col">
+                    <i class="icon icon-attention icon_color"></i>
+                    <span  ng-bind="team.views"></span>
+                  </div>
+                  <div class="col" ui-sref="home.dynamic({id:team.log_id})">
+                    <i class="icon icon-pinglun icon_color"></i>
+                    <span ng-bind="team.comments"></span>
+                  </div>
+                  <div class="col" ng-click="hitDynamic(team)">
+                    <i class="icon icon-zan icon_color" ng-class="{'icon-zand':team.is_hit,'text_color_blue_icon':team.is_hit}"></i>
+                    <span ng-bind="team.hits"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ion-infinite-scroll on-infinite="loadMoreDynamicTeam()" distance="1%" spinner="dots" ng-if="hasNextPage_team">
+            </ion-infinite-scroll>
+          </ion-scroll>
+        </ion-slide>
+        <ion-slide>
+          <ion-scroll style="height:93%">
+            <ion-refresher pulling-text="下拉可以刷新" on-refresh="doDynamicUserRefresh()">
+            </ion-refresher>
+            <div class="list home">
+              <div ng-repeat="user in users">
+                <div class="item margin-top-10 padding_rf_5">
+                  <div class="item-avatar-left no-min-height">
+                    <img ng-src="{{user.avatar|imgFilter:100}}" ng-click="jumpUrl(user)">
+                    <h2 ng-bind="user.name" ng-click="jumpUrl(user)"></h2>
+                    <span class="text_color_grey_12" am-time-ago="user.time*1000"></span>
+                    <span class="text_color_green_12" ng-click="delAttentionDynamic(user,$index)" ng-if="user.is_priv">删除</span>
+                  </div>
+                  <div class="row" >
+                    <p class="home_dynamic" jump-params="{id:{{user.log_id}}}" jump-url="home.dynamic" ng-bind-html="user.title|trustHtml"></p>
+                  </div>
+                  <div class="row no-padding" ng-repeat="imgs in user.imgs" ng-if="user.imgs.length==1">
+                    <div class="col icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,user.imgs)">
+                      <img ng-src="{{img|imgFilter:300:180:180:7}}" >
+                    </div>
+                  </div>
+                  <div class="row no-padding" ng-repeat="imgs in user.imgs" ng-if="user.imgs.length!=1&&$index<3" >
+                    <div class="col col-33 icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,user.imgs)">
+                      <img ng-src="{{img|imgFilter:300:120:120:6}}" >
+                    </div>
+                  </div>
+                </div>
+                <div class="row home-tool-bar">
+                  <div class="col">
+                    <i class="icon icon-attention icon_color"></i>
+                    <span  ng-bind="user.views"></span>
+                  </div>
+                  <div class="col" ui-sref="home.dynamic({id:user.log_id})">
+                    <i class="icon icon-pinglun icon_color"></i>
+                    <span ng-bind="user.comments"></span>
+                  </div>
+                  <div class="col" ng-click="hitDynamic(user)">
+                    <i class="icon icon-zan icon_color" ng-class="{'icon-zand':user.is_hit,'text_color_blue_icon':user.is_hit}"></i>
+                    <span ng-bind="user.hits"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ion-infinite-scroll on-infinite="loadMoreDynamicUser()" distance="1%" spinner="dots" ng-if="hasNextPage_user">
+            </ion-infinite-scroll>
+          </ion-scroll>
+        </ion-slide>
+      </ion-slide-box>
+    </tab-slide-box>
+  </ion-content>
+</ion-view>

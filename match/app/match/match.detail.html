@@ -1,0 +1,135 @@
+<link href="css/swiper.min.css" rel="stylesheet" type="text/css">
+<div class="wrap" on-finish-render>
+  <figure class="che shouye top_nav">
+    <img ng-src="{{staticUrl+match.cover}}" style="min-height: 130px;">
+    <figcaption>
+      <p ng-bind="match.name"></p>
+    </figcaption>
+  </figure>
+  <div class="fen_lan">
+    <ul>
+      <li ng-class="{'itt':isShowOne}" ng-click="isShowOne=true">赛事简介</li>
+      <li ng-class="{'itt':!isShowOne}" ng-click="isShowOne=false" class="none">章程</li>
+      <div class="clear"></div>
+    </ul>
+  </div>
+  <div class="app">
+    <div class="list_content" ng-show="isShowOne">
+      <div class="list_tt che">
+        <p data-ng-bind-html="match.description"></p>
+      </div>
+      <div class="list_content_but">
+      <button ng-click="sign()" class="button baoming_but">我要报名</button>
+      <button class="button guanzhu_but" ng-click="attention(match)" ng-if="match.is_attention" >取消关注</button>
+      <button class="button guanzhu_but" ng-click="attention(match)" ng-if="!match.is_attention">我要关注</button>
+      </div>
+    </div>
+    <div class="list_content" ng-show="!isShowOne">
+      <div class="list_tt che">
+        <p data-ng-bind-html="match.rules"></p>
+      </div>
+      <div class="list_content_but">
+      <button ng-click="sign()" class="button baoming_but">我要报名</button>
+        <button class="button guanzhu_but" ng-click="attention(match)" ng-if="match.is_attention" >取消关注</button>
+        <button class="button guanzhu_but" ng-click="attention(match)" ng-if="!match.is_attention">我要关注</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<section class="tiaodan search">-->
+  <!--<form>-->
+    <!--<div class="f_tiao">-->
+      <!--<h1>请填写以下信息</h1>-->
+      <!--<input type="text" placeholder="请输入您的手机号码">-->
+      <!--<div class="nav" id="nav">-->
+        <!--<p class="set">请输入您选择的球队 <span class="icon">&#xe60b;</span></p>-->
+        <!--<ul class="new">-->
+          <!--<li>电影</li>-->
+          <!--<li>游戏</li>-->
+          <!--<li>阅读</li>-->
+          <!--<li>KTV</li>-->
+          <!--<li>旅游</li>-->
+          <!--<li>运动</li>-->
+          <!--<li>宅</li>-->
+          <!--<li>娱乐</li>-->
+          <!--<li>新闻</li>-->
+          <!--<li>广告</li>-->
+        <!--</ul>-->
+      <!--</div>-->
+      <!--<input type="text" placeholder="请输入您的姓名">-->
+    <!--</div>-->
+    <!--<div class="bu_t"><a class="xiao">取消</a><a class="que none">确定</a></div>-->
+  <!--</form>-->
+<!--</section>-->
+<!--<section class="tiaodan cheng">-->
+  <!--<div class="f_tiao">-->
+    <!--<h1>报名成功</h1>-->
+    <!--<div class="bu_t"><a class="none">确定</a></div>-->
+  <!--</div>-->
+<!--</section>-->
+<section class="shou_bu" ng-if="match.matchtype==1">
+  <h1>参赛球队</h1>
+  <div class="swiper-container" id="swiper_team" swiper-directive slidesPerView="3" slidesPerGroup="3" slidesPerColumn="1">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" ng-repeat="member in members" >
+        <ul class="participating">
+          <li>
+            <a href="http://m.letusport.com/#/team/{{member[0].team_id}}">
+              <img class="avatar_img" ng-src="{{staticUrl+member[0].avatar}}">
+            </a>
+          </li>
+          <li>
+            <a href="http://m.letusport.com/#/team/{{member[1].team_id}}" ng-if="member[1]!=undefined">
+              <img class="avatar_img" ng-src="{{staticUrl+member[1].avatar}}">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <!--<div class="swiper-container" swiper-directive>-->
+    <!--<div class="swiper-wrapper">-->
+      <!--<div class="swiper-slide" ng-repeat="dat in data">{{dat.copy}}</div>-->
+    <!--</div>-->
+    <!--<div class="swiper-pagination"></div>-->
+  <!--</div>-->
+</section>
+<section class="shou_bu" ng-if="match.matchtype==2">
+  <h1>参赛个人</h1>
+  <div class="swiper-container" id="swiper_user" swiper-directive slidesPerView="3" slidesPerGroup="3" slidesPerColumn="1">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" ng-repeat="member in members" >
+        <ul>
+          <li>
+            <a href="http://m.letusport.com/#/member/{{member[0].uid}}">
+              <img class="avatar_img" ng-src="{{member[0].avatar}}">
+            </a>
+          </li>
+          <li>
+            <a href="http://m.letusport.com/#/member/{{member[1].uid}}" ng-if="member[1]!=undefined">
+              <img class="avatar_img" ng-src="{{member[1].avatar}}" >
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <!--<div class="swiper-container" swiper-directive>-->
+  <!--<div class="swiper-wrapper">-->
+  <!--<div class="swiper-slide" ng-repeat="dat in data">{{dat.copy}}</div>-->
+  <!--</div>-->
+  <!--<div class="swiper-pagination"></div>-->
+  <!--</div>-->
+</section>
+<section class="wrap">
+  <section class="shou_bu">
+    <h1>赞助商</h1>
+    <ul class="so_zan">
+      <li ng-repeat="sponsor in sponsors"><a href="{{sponsor.href}}"><img ng-src="{{staticUrl+sponsor.img}}"></a></li>
+      <div class="clear"></div>
+    </ul>
+  </section>
+</section>
+<!--<script src="js/swiper.min.js"></script>-->

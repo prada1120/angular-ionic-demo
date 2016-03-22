@@ -1,0 +1,24 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.detail()">
+      <button class="button button-clear icon ion-ios-arrow-left">球队</button>
+    </div>
+    <h1 class="title" >球队榜单</h1>
+    <div class="buttons buttons-right header-item" ui-sref="team.rankAdd()" ng-if="teamInfo.priv>2">
+      <button class="button button-clear icon ion-ios-plus-outline"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item class="item-icon-right" ng-repeat="rank in ranks" type="item-text-wrap">
+        <h3 ui-sref="team.rankDetail({rank_id:rank.id})">{{rank.title}}</h3>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <ion-option-button class="button-positive" ui-sref="team.rankEdit({rank_id:rank.id})"  ng-if="teamInfo.priv>2">编辑</ion-option-button>
+        <ion-option-button class="button-assertive" on-touch="removeRank(rank,$index)" ng-if="teamInfo.priv>2">删除</ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

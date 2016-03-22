@@ -1,0 +1,62 @@
+<div class="wrap top_nav" on-finish-render >
+  <table border="0"cellpadding="0"cellspacing="0">
+
+  <tr ng-repeat="values in rank.data" ng-if="$index==0">
+  <th ng-repeat="value in values track by $index" ng-if="$index==0" ></th>
+  <th ng-repeat="value in values track by $index" ng-if="$index!=0" ng-bind-html="value|trustHtml"></th>
+  </tr>
+  <tr ng-repeat="values in rank.data" ng-if="$index!=0" ng-init="rank_index=$index">
+  <td ng-repeat="value in values track by $index" class="tdd{{$index+1}}" ng-if="$index==0">
+  <span ng-bind="rank_index"></span>
+  </td>
+  <td ng-repeat="value in values track by $index" ng-if="$index!=0">
+    <p class="topscorer"  ng-bind-html="value|trustHtml"></p>
+  </td>
+  </tr>
+  </table>
+  <div style="height: 1px"></div>
+  <div class="bottom" >
+
+    <div class="iscroll-wrapper slide-top" ng-iscroll="ranksWrap" ng-iscroll-delay='10' ng-if="showRankList">
+      <div class="iscroll-scroller">
+        <ul>
+          <li ng-repeat="rank in ranks" ng-click="clickRank(rank,index)"><span  ng-bind="rank.title"></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot">
+      <ul ng-show="!isClick">
+        <li ng-if="ranks[0]!=undefined">
+          <a href="javascript:void (0)" ng-class="{'hover':index==0}"  ng-click="changeRank(ranks[0],0)">
+            <h1 class="icon">&#xe60e;</h1>
+            <p ng-bind="ranks[0].title"></p>
+          </a>
+        </li>
+        <li ng-if="ranks[1]!=undefined">
+          <a href="javascript:void (0)" ng-class="{'hover':index==1}"  ng-click="changeRank(ranks[1],1)">
+            <h1 class="icon">&#xe636;</h1>
+            <p ng-bind="ranks[1].title"></p>
+          </a>
+        </li>
+        <li ng-if="ranks[2]!=undefined">
+          <a href="javascript:void (0)" ng-class="{'hover':index==2}"  ng-click="changeRank(ranks[2],2)">
+            <h1 class="icon">&#xe640;</h1>
+            <p ng-bind="ranks[2].title"></p>
+          </a>
+        </li>
+        <div class="foot_right_1" ng-click="showRankList=!showRankList;showUpBtn=!showUpBtn;">
+          <img class="phb_button_bottom" src="/images/phb_button.png" ng-show="showUpBtn">
+          <img class="phb_button_bottom" src="/images/phb_button1.png" ng-show="!showUpBtn">
+        </div>
+      </ul>
+      <div class="foot_whole" ng-show="isClick">
+        <div class="foot_left_1" ng-bind="rank.title"></div>
+        <div class="foot_right_1" ng-click="showRankList=!showRankList;showUpBtn=!showUpBtn;">
+          <img class="phb_button_bottom" src="/images/phb_button.png" ng-show="showUpBtn">
+          <img class="phb_button_bottom" src="/images/phb_button1.png" ng-show="!showUpBtn">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

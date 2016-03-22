@@ -1,0 +1,54 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="vote.detail({vote_id:vote_id})">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" >有奖互动</h1>
+  </ion-header-bar>
+  <style>
+    a{
+      color: #fff !important;
+    }
+  </style>
+  <ion-content class="has-header">
+    <div id="award-container" on-finish-render>
+      <div id="turnplatewrapper" onselectstart="return false;">
+        <div id="turnplate">
+          <div id="awards" style="background: url('/{{award.path}}') top left no-repeat;"></div>
+          <div id="platebtn"></div>
+          <p id="msg"></p>
+          <p id="init" class="dn">
+            初始化中，请稍后<span></span>
+          </p>
+        </div>
+      </div>
+      <div id="gift">
+
+      </div>
+
+      <div class="wrapper">
+        <P ui-sref="vote.log({prize_id:prize_id})" style="color: #ffef89; font-size: 16px;text-align: center;"><button style="width: 120px;height: 44px;border-radius: 5px;margin: 0 auto;background: #fff;color: #E84C3D;">我的中奖</button></P>
+        <P style="color: #ffef89; font-size: 16px;">说明：</P>
+        <P style="color: #ffef89; font-size: 14px;" ng-bind-html="award.description|trustHtml">
+          1.用户抽奖后获取的实物奖品，客服将在72小时与您注册时的手机联系，请保持手机畅通。<br/>
+          2.奖项以转盘设置内容为准，最终解释权归属于乐土体育。<br/>
+        </P>
+        <div class="award-scroll-box" style="margin-bottom:12px;">
+          <div class="bcon">
+            <div class="list_lh">
+              <ul>
+                <li ng-repeat="log in award.logs">
+                  <P ><span ng-bind="log.uname"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span ng-bind="log.pg_name"></span>&nbsp;&nbsp;<span ng-bind="log.time*1000|date : 'MM-dd HH:mm'"></span></P>
+                </li>
+              </ul>
+            </div>
+            <!-- 代码结束 -->
+          </div>
+        </div>
+      </div>
+      <!--弹出层-->
+      <div class="mydialog" style="display:none;">
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

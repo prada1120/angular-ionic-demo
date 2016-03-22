@@ -1,0 +1,267 @@
+<link href="css/swiper.min.css" rel="stylesheet" type="text/css">
+<div class="banner wrap top_nav" ng-if="result.imgs">
+  <div class="swiper-container" id="banner" swiper-directive slidesPerView="1" slidesPerGroup="1" slidesPerColumn="1">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" ng-repeat="img in result.imgs | limitTo:3">
+        <img class="ad_img" ng-src="{{img}}" ng-click="showAlbum(img)">
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+<div  on-finish-render>
+  <div class="wr xiang xiang1">
+      <div class="xiang_detial" ng-if="match.matchtype==1">
+      <!--单打-->
+      <div class="xiang_kuang" ng-if="result.result_type==1">
+        <div class="xiang_title">
+          <p>{{result.match_time| date:'MM月dd日 HH:mm'}}</p>
+          <p>{{result.match_address}}</p>
+        </div>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==0">
+          <a href="http://m.letusport.com/#/team/{{member.id}}"><img ng-src="{{staticUrl+member.avatar}}"></a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span >{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <h1>{{result.match_result}}</h1>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==1">
+          <a href="http://m.letusport.com/#/team/{{member.id}}"><img ng-src="{{staticUrl+member.avatar}}"></a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span>{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <div class="clear"></div>
+        <a ng-class="{'bu_t':true,'background-ccc':result.imgs==false}" style="float: left;margin-left: 10%" ng-click="showAlbum(result.imgs[0])">精彩时刻</a>
+        <a ng-class="{'bu_t':true,'background-ccc':result.video_url==''}" style="float: right;margin-right: 10%" href="{{result.video_url}}" >比赛集锦</a>
+      </div>
+      <!--双打-->
+      <div class="xiang_kuang" ng-if="result.result_type==2">
+        <div class="xiang_title">
+          <p>{{result.match_time| date:'MM月dd日 HH:mm'}}</p>
+          <p>{{result.match_address}}</p>
+        </div>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==0">
+          <a href="http://m.letusport.com/#/team/{{member.id}}"><img class="match-result-doubles" ng-src="{{staticUrl+member.avatar}}"></a>
+          <a href="http://m.letusport.com/#/team/{{member.id}}"><img class="match-result-doubles" ng-src="{{staticUrl+result.members[1].avatar}}"></a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span >{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <h1>{{result.match_result}}</h1>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==2">
+          <a href="http://m.letusport.com/#/team/{{member.id}}"><img class="match-result-doubles" ng-src="{{staticUrl+member.avatar}}"></a>
+          <a href="http://m.letusport.com/#/team/{{member.id}}"><img class="match-result-doubles" ng-src="{{staticUrl+result.members[3].avatar}}"></a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span>{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <div class="clear"></div>
+        <a ng-class="{'bu_t':true,'background-ccc':result.imgs==false}" style="float: left;margin-left: 10%" ng-click="showAlbum(result.imgs[0])">精彩时刻</a>
+        <a ng-class="{'bu_t':true,'background-ccc':result.video_url==''}" style="float: right;margin-right: 10%" href="{{result.video_url}}" >比赛集锦</a>
+      </div>
+      <!--混合-->
+      <div class="xiang_kuang" ng-if="result.result_type==3">
+        <div class="xiang_title">
+          <p>{{result.match_time| date:'MM月dd日 HH:mm'}}</p>
+          <p>{{result.match_address}}</p>
+        </div>
+        <div class="swiper-container" style="margin-top: 10px;" id="swiper{{result.id}}" swiper-directive slidesPerView="3" slidesPerGroup="3" slidesPerColumn="1">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="value in result.members" >
+              <ul>
+                <li>
+                  <a href="http://m.letusport.com/#/tab/team/{{value[0].id}}">
+                    <img class="avatar_img" ng-src="/{{value[0].avatar}}">
+                  </a>
+                </li>
+                <li>
+                  <a href="http://m.letusport.com/#/tab/team/{{value[1].id}}">
+                    <img class="avatar_img" ng-src="/{{value[1].avatar}}" ng-if="value[1]!=undefined">
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="clear"></div>
+        <a ng-class="{'bu_t':true,'background-ccc':result.imgs==false}" style="float: left;margin-left: 10%" ng-click="showAlbum(result.imgs[0])">精彩时刻</a>
+        <a ng-class="{'bu_t':true,'background-ccc':result.video_url==''}" style="float: right;margin-right: 10%" href="{{result.video_url}}">比赛集锦</a>
+      </div>
+    </div>
+    <!--个人赛-->
+    <div class="xiang_detial" ng-if="match.matchtype!=1">
+
+      <!--单打-->
+      <div class="xiang_kuang" ng-if="result.result_type==1">
+        <div class="xiang_title">
+          <p>{{result.match_time| date:'MM月dd日 HH:mm'}}</p>
+          <p>{{result.match_address}}</p>
+        </div>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==0">
+          <a href="http://m.letusport.com/#/member/{{member.uid}}">
+            <img ng-src="{{member.avatar}}">
+          </a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span >{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <h1>{{result.match_result}}</h1>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==1">
+          <a href="http://m.letusport.com/#/member/{{member.uid}}">
+            <img ng-src="{{member.avatar}}">
+          </a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span>{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <div class="clear"></div>
+        <a ng-class="{'bu_t':true,'background-ccc':result.imgs==false}" style="float: left;margin-left: 10%" ng-click="showAlbum(result.imgs[0])">精彩时刻</a>
+        <a ng-class="{'bu_t':true,'background-ccc':result.video_url==''}" style="float: right;margin-right: 10%" href="{{result.video_url}}" >比赛集锦</a>
+      </div>
+      <!--双打-->
+      <div class="xiang_kuang" ng-if="result.result_type==2">
+        <div class="xiang_title">
+          <p>{{result.match_time| date:'MM月dd日 HH:mm'}}</p>
+          <p>{{result.match_address}}</p>
+        </div>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==0">
+          <a href="http://m.letusport.com/#/member/{{member.uid}}">
+            <img class="match-result-doubles" ng-src="{{member.avatar}}">
+          </a>
+          <a href="http://m.letusport.com/#/member/{{result.members[1].uid}}">
+            <img class="match-result-doubles" ng-src="{{result.members[1].avatar}}">
+          </a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span >{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <h1>{{result.match_result}}</h1>
+        <div class="kk1" ng-repeat="member in result.members" ng-if="$index==2">
+          <a href="http://m.letusport.com/#/member/{{member.uid}}">
+            <img class="match-result-doubles" ng-src="{{member.avatar}}">
+          </a>
+          <a href="http://m.letusport.com/#/member/{{result.members[3].uid}}">
+            <img class="match-result-doubles" ng-src="{{result.members[3].avatar}}">
+          </a>
+          <p>{{member.name}}</p>
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':member.is_hit}" href="javascript:void (0)" ng-click="addHits(member)">
+              <b class="icon inn1"></b>
+              <span>{{member.result_hits}}</span>
+            </a>
+          </p>
+        </div>
+        <div class="clear"></div>
+        <a ng-class="{'bu_t':true,'background-ccc':result.imgs==false}" style="float: left;margin-left: 10%" ng-click="showAlbum(result.imgs[0])">精彩时刻</a>
+        <a ng-class="{'bu_t':true,'background-ccc':result.video_url==''}" style="float: right;margin-right: 10%" href="{{result.video_url}}" >比赛集锦</a>
+      </div>
+      <!--混合-->
+      <div class="xiang_kuang" ng-if="result.result_type==3">
+        <div class="xiang_title">
+          <p>{{result.match_time| date:'MM月dd日 HH:mm'}}</p>
+          <p>{{result.match_address}}</p>
+        </div>
+        <div class="swiper-container" style="margin-top: 10px;" id="swiper{{result.id}}" swiper-directive slidesPerView="3" slidesPerGroup="3" slidesPerColumn="1">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="value in result.members" >
+              <ul>
+                <li>
+                  <a href="http://m.letusport.com/#/member/{{value[0].uid}}"><img class="avatar_img" ng-src="{{value[0].avatar}}"></a>
+                </li>
+                <li>
+                  <a href="http://m.letusport.com/#/member/{{value[1].uid}}" ng-if="value[1]!=undefined">
+                    <img class="avatar_img" ng-src="{{value[1].avatar}}" ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="clear"></div>
+        <a ng-class="{'bu_t':true,'background-ccc':result.imgs==false}" style="float: left;margin-left: 10%" ng-click="showAlbum(result.imgs[0])">精彩时刻</a>
+        <a ng-class="{'bu_t':true,'background-ccc':result.video_url==''}" style="float: right;margin-right: 10%" href="{{result.video_url}}" >比赛集锦</a>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="wrap zan bottom_nav1">
+  <section class="shou_bu shou_bu1 comments">
+    <h1>交流区</h1>
+    <dl ng-repeat="comment in comments">
+      <dt><a href="http://m.letusport.com/#/member/{{comment.uid}}"><img ng-src="/{{comment.uavatar}}"></a></dt>
+      <dd>
+        <h2><a class="text-color-blue" href="http://m.letusport.com/#/member/{{comment.uid}}">{{comment.uname}}</a><span>{{comment.time}}</span></h2>
+        <p>{{comment.content}}</p>
+      </dd>
+      <div class="clear"></div>
+      <div class="zan_miao">
+        <div class="left">
+          <p class="icon">
+            <a ng-class="{'zhan':true,'zhanz':comment.is_hit}" href="javascript:void (0);" ng-click="addCommentHit(comment)">
+              <b class="icon inn1"></b>
+              <em>(<span>{{comment.hits}}</span>)</em>
+            </a>
+          </p>
+        </div>
+        <div class="right icd button" ng-click="addReply(comment.id)" ><span class="icon ic1">&#xe60f;</span>{{comment.nums}}回复</div>
+        <div class="clear"></div>
+      </div>
+      <div class="hui_content" ng-if="comment.nums">
+        <dl ng-repeat="reply in comment.replys">
+          <dt><a href="http://m.letusport.com/#/member/{{reply.uid}}"><img ng-src="/{{reply.uavatar}}"></a></dt>
+          <dd>
+            <h2><a class="text-color-blue" href="http://m.letusport.com/#/member/{{reply.uid}}">{{reply.uname}}</a><span>回复:{{comment.uname}}</span><span>{{reply.time}}</span></h2>
+            <p>{{reply.content}}</p>
+          </dd>
+          <div class="clear"></div>
+        </dl>
+      </div>
+    </dl>
+  </section>
+</section>
+<div class="bottom">
+  <dl class="pin">
+    <dt><input class="button" readonly type="text" placeholder="我也来说两句" ng-click="addReply(0)"></dt>
+    <dd><button><span class="icon">&#xe64b;</span>{{comments.length}}</button></dd>
+    <div class="clear"></div>
+  </dl>
+</div>
+<section class="tiaodan search toggle" ng-show="isShowRepet">
+  <div class="pin_content">
+    <textarea placeholder="我也来说两句" ng-model="comment_content" ></textarea>
+  </div>
+  <div class="bu_t cc_bu">
+    <a class="xiao" ng-click="isShowRepet=false">取消</a>
+    <a class="que none" ng-click="addComment()">评论</a></div>
+</section>
+

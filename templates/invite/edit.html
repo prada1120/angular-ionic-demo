@@ -1,0 +1,70 @@
+<ion-view title="编辑约战">
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear button-light icon ion-ios-arrow-left" ui-sref="invite.detail()">约战</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-clear" ng-click="submitEditInvite()" >确定</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-scroll class="has-header" style="display: inline;">
+    <div class="list ">
+      <label class="item item-input">
+        <span class="input-label">约战标题</span>
+        <input class="text_color_888" ng-model="invite.title" type="text" placeholder="请输入约战标题">
+      </label>
+      <label class="item item-input item-icon-right">
+        <span class="input-label">项目</span>
+        <input class="background-fff" on-touch="showTypePopup()" disabled type="text" ng-model="invite.project_name" placeholder="请选择球队类型">
+        <i class="icon ion-chevron-right icon-accessory" on-touch="showTypePopup()"></i>
+      </label>
+      <div class="item row">
+        <label class="col" ng-class="{'btn-switch-active':invite.invite_type==1,'btn-switch':invite.invite_type!=1}">约球队</label>
+        <label class="col" ng-class="{'btn-switch-active':invite.invite_type!=1,'btn-switch':invite.invite_type==1}">约个人</label>
+      </div>
+      <label class="item item-input item-select" ng-if="invite.invite_type==1">
+        <span class="input-label">选择球队</span>
+        <select ng-model="invite.uid" ng-options="team.id as team.name for team in myTeams">
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <span class="input-label">约球类型</span>
+        <select ng-model="invite.type" ng-options="type for type in tabs[invite.project]['invite']">
+        </select>
+      </label>
+    </div>
+    <div class="list ">
+
+      <div class="item item-input item-icon-right">
+
+        <span class="input-label">打球时间</span>
+        <select class="common-select" ng-model="invite.open_date" ng-options="day.value as day.text for day in days"></select>
+        <select class="common-select" ng-model="invite.open_hours" ng-options="hour for hour in hours" ></select>
+      </div>
+      <label class="item item-input">
+        <span class="input-label">场地</span>
+        <input class=" text_color_888" ng-model="invite.address" type="text" placeholder="请输入场地名称">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">费用</span>
+        <input class=" text_color_888" ng-model="invite.fee" type="text" placeholder="请输入费用">
+      </label>
+    </div>
+    <div class="list ">
+      <label class="item item-input">
+        <span class="input-label">联系人</span>
+        <input class=" text_color_888" ng-model="invite.name" type="text" placeholder="请输入联系人">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">联系电话</span>
+        <input class=" text_color_888" ng-model="invite.contact" type="text" placeholder="请输入联系电话">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">备注</span>
+        <textarea rows="8" placeholder="请输入备注名称" ng-model="invite.comment"></textarea>
+      </label>
+    </div>
+
+  </ion-scroll>
+</ion-view>

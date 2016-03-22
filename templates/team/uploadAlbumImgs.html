@@ -1,0 +1,39 @@
+<div class="modal">
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="uploadImgModal.hide()">取消</button>
+		</div>
+		<h1 class="title">传照片</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="sumbitUpload()">上传</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content class="new-topics" scroll="false">
+
+		<div class="padding">
+			<div class="zpsc_title">
+				<dl>
+					<dd>上传到</dd>
+					<dt>{{album.album_name}}<span>
+						<img src="images/ico1.png"width="10" height="16">
+					</span></dt>
+				</dl>
+			</div>
+			<ul class="xiangce_lb_img">
+				<li>
+					<img src="images/xiance_tj_an.png">
+					<input type="file" ngf-select="uploadFiles($files)" multiple="multiple" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" >
+				</li>
+				<li ng-repeat="img in upload_imgs">
+					<img ng-src="{{img |imgFilter:200}}">
+					<div class="xiance_gb_an">
+						<img src="images/xiance_gb_an.png" on-touch="removeImg(img,$index)" width="17" height="17">
+					</div>
+				</li>
+			</ul>
+		</div>
+
+	</ion-content>
+
+</div>

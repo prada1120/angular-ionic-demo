@@ -1,0 +1,98 @@
+<ion-view>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="teamList()">
+      <button class="button button-clear">更多</button>
+    </div>
+    <h1 class="title" ng-bind="teamInfo.name"></h1>
+    <div class="buttons buttons-right header-item" on-touch="showTeamDetailOptPopover($event)">
+      <button class="button button-clear icon ion-navicon"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="wrap">
+      <div class="team_banner">
+        <img  ng-src="{{teamInfo.banner |imgFilter:101}}">
+        <div class="team_banner_bottom">
+          <div class="team_banner_bottom_text"><span ng-bind="teamInfo.city_str" ng-if="teamInfo.city_str"></span>&nbsp;&nbsp;<span ng-bind="teamInfo.type"></span></div>
+          <div class="team_banner_bottom_img">
+            <img class="avatar_img-70" ng-src="{{teamInfo.avatar|imgFilter:100}}">
+          </div>
+          <ul>
+            <li ui-sref="team.glories()">
+              <P>战绩</P>
+              <p>荣誉</P>
+            </li>
+            <li ng-click="show(teamInfo.qiuyi)">
+              <P>球队</P>
+              <P>球衣</P>
+            </li>
+            <li>
+              <P ng-bind="teamInfo.time*1000|date : 'yyyy-MM'"></P>
+              <P>创建时间</P>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <ul class="team_nav">
+        <li ui-sref="team.ranks()">
+          <p><img src="images/bangdan_icon.png" width="44" height="44"></p>
+          <p>榜单</p>
+        </li>
+        <li ui-sref="team.albums()">
+          <p><img src="images/xiance_icon.png" width="44" height="44"></p>
+          <p>相册</p>
+        </li>
+        <li ui-sref="team.members()">
+          <p><img src="images/chengyuan_icon.png" width="44" height="44"></p>
+          <p>成员</p>
+        </li>
+        <li ui-sref="team.activities()">
+          <p><img src="images/huodong_icon.png" width="44" height="44"></p>
+          <p>活动</p>
+        </li>
+      </ul>
+      <div class="fen_lan mtop1 border-top-grey">
+        <ul>
+          <li  ng-class="{'itt':isShowOne}" ng-click="isShowOne=true" >球队简介</li>
+          <li ng-class="{'itt':!isShowOne,'none':true}" ng-click="isShowOne=false">章程</li>
+          <div class="clear"></div>
+        </ul>
+      </div>
+      <div class="wrapper xiang">
+        <div class="mtop3 " ng-show="isShowOne">
+          <div class="list_tt che">
+            <p ng-if="!teamInfo.description">暂无内容</p>
+            <p ng-bind-html="teamInfo.description|trustHtml"></p>
+          </div>
+        </div>
+        <div class="mtop3 "  ng-show="!isShowOne">
+          <div class="list_tt che">
+            <p ng-if="!teamInfo.zhangcheng">暂无内容</p>
+            <p ng-bind-html="teamInfo.zhangcheng|trustHtml"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap ptop1">
+      <div class="wrapper gr1 xiang">
+        <h5 class="con black">
+          <a ui-sref="team.news()">
+            <span class="right blue">更多></span>
+          </a>球队动态
+        </h5>
+      </div>
+      <dl class="app white xiang" ng-if="dynamics.length<1">
+        <p>暂无内容</p>
+      </dl>
+      <dl style="margin-bottom: 0px" ng-repeat="dynamic in dynamics">
+          <div class="item" jump-params="{id:{{dynamic.log_id}}}" jump-url="team.dynamicDetail" >
+            <h4 class="right mtop2" ng-bind="dynamic.time*1000|date : 'yyyy-MM-dd'"></h4>
+            <h4 class="text-overflow home_dynamic"  ng-bind-html="dynamic.title|trustHtml"></h4>
+          </div>
+      </dl>
+    </div>
+  </ion-content>
+</ion-view>

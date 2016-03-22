@@ -1,0 +1,12 @@
+<div class="wrap top_nav" on-finish-render >
+  <dl class="app sai" ng-repeat="new in news">
+    <dt><img ng-src="{{new.thumb}}"></dt>
+    <dd class="lao ">
+      <a ui-sref="match.news.detail({id:new.id})">
+        <p class="news_title" ng-bind="new.title"></p>
+        <p class="news_time" ng-bind="new.time"></p>
+      </a>
+    </dd>
+    <div class="clear"></div>
+  </dl>
+</div>

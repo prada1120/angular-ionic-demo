@@ -1,0 +1,35 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="member.info({member_id:member_id})">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title tab-title">粉丝</h1>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doUserAttentionsRefresh()">
+    </ion-refresher>
+
+    <ion-list>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="attention in users" type="item-text-wrap" ui-sref="member.info({member_id:attention.uid})">
+        <img ng-src="{{attention.user.avatar|imgFilter:200}}" >
+        <h3 >{{attention.user.real_name}}</h3>
+        <p >
+          <span ng-if="attention.user.sex==1">男</span>
+          <span ng-if="attention.user.sex==2">女</span>
+          <span ng-if="attention.user.sex==0">保密</span>
+          <span class="pont" ng-if="attention.user.age">&nbsp;&nbsp;|&nbsp;&nbsp;
+            <span ng-bind="attention.user.age" >
+              <span>岁</span>
+            </span>
+          </span>
+
+        </p>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadUserAttentions()" distance="10%" icon="ion-loading-c" ng-if="userHasNextPage">
+    </ion-infinite-scroll>
+  </ion-content>
+
+</ion-view>

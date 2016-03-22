@@ -1,0 +1,35 @@
+<div class="modal">
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="selectUserModal.hide()">取消</button>
+		</div>
+
+		<h1 class="title" ng-bind="selectUserModalTitle">选择用户</h1>
+
+		<div class="buttons">
+			<button class="button button-clear" ng-click="userModalSelected()">确定</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-content>
+		<div>
+			<div class="list">
+				<div class="item item-avatar item-icon-right" ng-repeat="select in selects" type="item-text-wrap" on-touch="select.is_selected=!select.is_selected">
+					<img ng-src="{{select.user.avatar|imgFilter:200}}" >
+					<h3 >{{select.user.real_name}}</h3>
+					<p >
+						<span ng-if="select.user.sex==1">男</span>
+						<span ng-if="select.user.sex==2">女</span>
+						<span ng-if="select.user.sex==0">保密</span>
+						<span class="pont" ng-if="select.user.age">&nbsp;&nbsp;|&nbsp;&nbsp;
+						<span ng-bind="select.user.age" >
+						  <span>岁</span>
+						</span>
+						</span>
+					</p>
+					<i class="icon text_color_grey  icon-xuanzhong" ng-class="{'text_color_blue_icon':select.is_selected}"></i>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</div>

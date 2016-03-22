@@ -1,0 +1,40 @@
+<ion-view cache-view="false" >
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="inviteList()">
+      <button class="button button-clear">更多</button>
+    </div>
+    <h1 class="title" ng-bind="invite.title"></h1>
+    <div class="buttons buttons-right header-item">
+      <button class="button button-clear icon ion-navicon"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header has-footer">
+    <div class="wrap">
+      <div class="jbkq_top_text dibu_xt">
+        <h3 class="yjhd_bottom_biaoti" ng-bind="invite.title"></h3>
+        <p class="topiaosj">发布时间：<span ng-bind="invite.time*1000|date : 'yyyy-MM-dd HH:mm'"></span></p>
+        <p>发起人：<span class="xingming" ng-bind="invite.uname"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt">
+        <p class="topiaosj">打球时间：<span ng-bind="invite.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span></p>
+        <p class="topiaosj">场    地：<span ng-bind="invite.address"></span></p>
+        <p class="topiaosj">费    用：<span ng-bind="invite.fee"></span></p>
+        <p class="topiaosj">类    型：<span ng-bind="invite.type"></span></p>
+        <p class="topiaosj">备注：<span ng-bind="invite.comment"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt">
+        <h3 class="cydr text_color_blue_icon">已报名 ( <b ng-bind="invite.count"></b> )</h3>
+        <ul class="row">
+          <li ng-repeat="member in invite.members" class="col">
+            <P><img data-id="{{member.id}}" class="avatar_img-70"  ng-src="{{member.avatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </ion-content>
+  <div class="bar bar-footer dibu">
+    <button class="btn-disabled">应战</button>
+  </div>
+</ion-view>

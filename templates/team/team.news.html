@@ -1,0 +1,79 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.detail()">
+      <button class="button button-clear icon ion-ios-arrow-left">球队</button>
+    </div>
+    <div class="tab1">
+      <span class="col col-center" ng-class="{'tab_active':!tab2}" on-touch="tab2=false">
+        动态
+      </span>
+      <span class="col col-center" ng-class="{'tab_active':tab2}" on-touch="tab2=true">
+        新闻
+      </span>
+    </div>
+    <h1 class="title top-tab-title"> </h1>
+    <div class="buttons buttons-right header-item" on-touch="showPublishNewsModal()" ng-if="teamInfo.priv>0&&!tab2">
+      <button class="button button-clear icon ion-ios-camera-outline"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header background-grey" ng-show="!tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doDynamicRefresh()">
+    </ion-refresher>
+    <div class="list home">
+      <div ng-repeat="dynamic in dynamics">
+        <div class="item margin-top-10 padding_rf_5">
+          <div class="item-avatar-left no-min-height" >
+            <img ng-src="{{dynamic.avatar|imgFilter:100}}" >
+            <h2 ng-bind="dynamic.name"></h2>
+            <span class="text_color_grey_12" am-time-ago="dynamic.time*1000"></span>
+            <span class="text_color_green_12" ng-click="delDynamic(dynamic,$index)" ng-if="teamInfo.priv>2">删除</span>
+          </div>
+          <div class="row" jump-params="{id:{{dynamic.log_id}}}" jump-url="team.dynamicDetail">
+            <p class="home_dynamic" ng-bind-html="dynamic.title|trustHtml"></p>
+          </div>
+          <div class="row no-padding" ng-repeat="imgs in dynamic.imgs" ng-if="dynamic.imgs.length==1">
+            <div class="col icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,dynamic.imgs)">
+              <img ng-src="{{img|imgFilter:300:180:180:7}}" >
+            </div>
+          </div>
+          <div class="row no-padding" ng-repeat="imgs in dynamic.imgs" ng-if="dynamic.imgs.length!=1">
+            <div class="col col-33 icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,dynamic.imgs)">
+              <img ng-src="{{img|imgFilter:300:120:120:6}}" >
+            </div>
+          </div>
+        </div>
+        <div class="row home-tool-bar">
+          <div class="col">
+            <i class="iconfont icon-attention icon_color"></i>
+            <span ng-bind="dynamic.views"></span>
+          </div>
+          <div class="col">
+            <i class="icon icon-pinglun icon_color"></i>
+            <span ng-bind="dynamic.comments"></span>
+          </div>
+          <div class="col" ng-click="hitDynamic(dynamic)">
+            <i class="icon icon-zan icon_color" ng-class="{'icon-zand':dynamic.is_hit,'text_color_blue_icon':dynamic.is_hit}"></i>
+            <span ng-bind="dynamic.hits"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ion-infinite-scroll on-infinite="loadMoreDynamic()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_dynamic">
+    </ion-infinite-scroll>
+  </ion-content>
+  <ion-content class="has-header background-grey" ng-show="tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-icon-right" ng-repeat="new in news" type="item-text-wrap" >
+        <h3 ui-sref="team.newsDetail({id:new.id})">{{new.title}}</h3>
+        <p ng-bind="new.time*1000|date : 'yyyy-MM-dd'"></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <ion-option-button class="button-assertive" on-touch="removeNews(new,$index)" ng-if="teamInfo.priv>2" >删除</ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,27 @@
+<ion-popover-view style="width: 115px;">
+  <ion-content>
+    <div class="list">
+      <div class="item" ng-if="teamInfo.priv>2" on-touch="teamDetailOptPopover.hide();" ui-sref="team.waitMembers()">
+        <i class="icon ion-ios-personadd-outline" ></i>审核新人
+      </div>
+      <div class="item" ng-if="teamInfo.priv>2" on-touch="teamDetailOptPopover.hide();" ui-sref="team.edit()">
+        <i class="icon ion-ios-compose-outline" ></i>编辑球队
+      </div>
+      <div class="item" ng-if="teamInfo.priv>0&&teamInfo.priv!=100" on-touch="exitTeam(teamInfo)">
+        <i class="icon ion-android-exit"></i>退出球队
+      </div>
+      <div class="item" ng-if="teamInfo.priv<0||teamInfo.priv==100" on-touch="joinTeam(teamInfo)">
+        <i class="icon ion-ios-plus-outline" ></i>加入球队
+      </div>
+      <div class="item" ng-if="!teamInfo.is_attention" on-touch="addAttention(teamInfo)">
+        <i class="icon ion-ios-heart-outline" ></i>关注球队
+      </div>
+      <div class="item" ng-if="teamInfo.is_attention" on-touch="addAttention(teamInfo)">
+        <i class="icon ion-ios-heart color-blue" ></i>取消关注
+      </div>
+      <div class="item" ng-if="teamInfo.priv==0">
+        <i class="icon ion-ios-plus color-blue"></i>已申请
+      </div>
+    </div>
+  </ion-content>
+</ion-popover-view>

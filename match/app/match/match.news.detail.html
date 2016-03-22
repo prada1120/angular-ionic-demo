@@ -1,0 +1,76 @@
+<div class="wrap top_nav" on-finish-render>
+  <div class="wr news_dtl">
+    <figure class="che shouye top_nav">
+      <h1 ng-bind="news.title"></h1>
+    </figure>
+    <article >
+      <p data-ng-bind-html="news.content" ></p>
+    </article>
+  </div>
+  <div class="wr wrap1">
+    <img src="images/d_03.jpg">
+  </div>
+  <section class="wrap">
+    <section class="shou_bu">
+      <h1>赞助商</h1>
+      <ul class="so_zan">
+        <li ng-repeat="sponsor in sponsors">
+          <a href="{{sponsor.href}}"><img ng-src="{{staticUrl+sponsor.img}}"></a>
+        </li>
+        <div class="clear"></div>
+      </ul>
+    </section>
+    <section class="wrap zan bottom_nav1">
+      <section class="shou_bu shou_bu1 comments">
+        <h1>交流区</h1>
+        <dl ng-repeat="comment in comments">
+          <dt><a href="http://m.letusport.com/#/member/{{comment.uid}}"><img ng-src="{{comment.uavatar}}"></a></dt>
+          <dd>
+            <h2><a class="text-color-blue" href="http://m.letusport.com/#/member/{{comment.uid}}">{{comment.uname}}</a><span ng-bind="comment.from_time"></span></h2>
+            <p ng-bind="comment.topic"></p>
+          </dd>
+          <div class="clear"></div>
+          <div class="zan_miao">
+            <div class="left">
+              <p class="icon">
+                <a ng-class="{'zhan':true,'zhanz':comment.is_hit}" href="javascript:void (0);" ng-click="addCommentHit(comment)">
+                  <b class="icon inn1"></b>
+                  <em>(<span ng-bind="comment.hits"></span>)</em>
+                </a>
+              </p>
+            </div>
+            <div class="right icd button" ng-click="addReply(comment.id)" ><span class="icon ic1">&#xe60f;</span>{{comment.nums}}回复</div>
+            <div class="clear"></div>
+          </div>
+          <div class="hui_content" ng-if="comment.nums">
+            <dl ng-repeat="reply in comment.replys">
+              <dt><a href="http://m.letusport.com/#/member/{{reply.uid}}"><img ng-src="{{reply.uavatar}}"></a></dt>
+              <dd>
+                <h2><a class="text-color-blue" href="http://m.letusport.com/#/member/{{reply.uid}}">{{reply.uname}}</a><span>回复:{{comment.uname}}</span><span ng-bind="reply.form_time"></span></h2>
+                <p ng-bind="reply.content"></p>
+              </dd>
+              <div class="clear"></div>
+            </dl>
+          </div>
+        </dl>
+      </section>
+    </section>
+    <div class="bottom">
+      <dl class="pin">
+        <dt><input class="button" readonly type="text" placeholder="我也来说两句" ng-click="isShowRepet=true"></dt>
+        <dd><button><span class="icon">&#xe64b;</span>{{comments.length}}</button></dd>
+        <div class="clear"></div>
+      </dl>
+    </div>
+    <section class="tiaodan search toggle" ng-show="isShowRepet">
+      <div class="pin_content">
+        <textarea placeholder="我也来说两句" ng-model="comment_content" ></textarea>
+      </div>
+      <div class="bu_t cc_bu">
+        <a class="xiao" ng-click="isShowRepet=false">取消</a>
+        <a class="que none" ng-click="addComment()">评论</a></div>
+    </section>
+  </section>
+</div>
+
+

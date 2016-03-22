@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+</head>
+<style>
+    .input_uploadAvatar{
+        opacity: 0;
+    }
+</style>
+<body>
+<div class="bar bar-header bar-positive">
+    <h1 class="title">bar-positive</h1>
+</div>
+<div class="scroll-content has-header">
+    <div class="list">
+        <div class="item item-avatar-right item-input">
+            <span class="input-label">球队名称</span>
+            <input type="text" placeholder="给我一首歌">
+        </div>
+        <div class="item item-avatar-right item-input">
+            <img src="../img/no_photo.jpg">
+            <span class="input-label">球队logo</span>
+            <input class="input_uploadAvatar" type="file" >
+        </div>
+        <div class="item item-avatar-right item-input">
+            <span class="input-label">球队地址</span>
+            <span>北京-朝阳区</span>
+        </div>
+        <div class="item item-input item-avatar-right item-stacked-label item-icon-right">
+            <span class="input-label">球队介绍</span>
+            <span>我们是一个完美的球队</span>
+            <i class="icon ion-chevron-right icon-accessory disable-user-behavior" on-tap="showTypePopup()"></i>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-avatar-right item-input">
+            <img src="../img/no_photo.jpg">
+            <span class="input-label">球衣照片</span>
+            <input class="input_uploadAvatar" type="file" >
+        </div>
+        <div class="item item-input item-stacked-label item-icon-right">
+            <span class="input-label">球队章程</span>
+            <span>我们是一个完美的球队</span>
+            <i class="icon ion-chevron-right icon-accessory disable-user-behavior" on-tap="showTypePopup()"></i>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-avatar-right item-input">
+            <img src="../img/no_photo.jpg">
+            <span class="input-label">球队banner</span>
+            <input class="input_uploadAvatar" type="file" >
+        </div>
+        <div class="item item-avatar-right item-input item-icon-right">
+            <span class="input-label">战绩荣誉</span>
+            <i class="icon ion-chevron-right icon-accessory disable-user-behavior" on-tap="showTypePopup()"></i>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="tab.user()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <div class="tab2">
+      <span class="col col-center" ng-class="{'tab_active':!tab2}" on-touch="tab2=false">
+        参与的赛事
+      </span>
+      <span class="col col-center" ng-class="{'tab_active':tab2}" on-touch="tab2=true">
+        关注的赛事
+      </span>
+    </div>
+    <h1 class="title top-tab-title"></h1>
+  </ion-header-bar>
+  <ion-content class="has-header match"  ng-show="!tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doJoinMatchRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <figure class="che" ng-repeat="match in matchs_join" ng-if="matchs_join.length>0">
+        <a href="http://m.letusport.com/match/#/{{match.id}}/{{match.me_id}}" >
+          <img ng-src="{{match.img|imgFilter:100}}" style="min-height: 130px;width: 100%;">
+
+          <figcaption>
+            <h1 class="text_color_white" ng-bind="match.name"></h1>
+          </figcaption>
+        </a>
+      </figure>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreJoinMatches()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_join">
+    </ion-infinite-scroll>
+  </ion-content>
+
+  <ion-content class="has-header match" ng-show="tab2">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doAttentionMatchRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <figure class="che" ng-repeat="match in matchs_attention" ng-if="matchs_attention.length>0">
+        <a href="http://m.letusport.com/match/#/{{match.id}}/{{match.me_id}}" >
+          <img ng-src="{{match.img|imgFilter:100}}" style="min-height: 130px;width: 100%;">
+
+          <figcaption>
+            <h1 class="text_color_white" ng-bind="match.name"></h1>
+          </figcaption>
+        </a>
+      </figure>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMoreAttentionMatches()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage_attention">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

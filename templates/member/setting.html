@@ -1,0 +1,27 @@
+<ion-view view-title="设置" load-publish>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="tab.user()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" >设置</h1>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="list padding">
+      <div class="item item-icon-right margin-bottom-4 padding" >
+        <p>账号安全</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <div class="item item-icon-right margin-bottom-4 padding" >
+        <p>清理缓存</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <div class="item item-icon-right margin-bottom-4 padding" >
+        <p>关于乐土</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <div class="item margin-bottom-4 padding logout" on-touch="logout()">
+        <span>注销登录</span>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

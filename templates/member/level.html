@@ -1,0 +1,17 @@
+<ion-view view-title="水平特点">
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="left">
+      <button class="button button-light button-icon icon ion-ios-arrow-left" ui-sref="member.info({member_id:member.uid})"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="has-header member_level">
+    <div class="list" style="padding: 10px">
+      <div class="project_lists" ng-repeat="level in member.levels">
+        <div class="project" ng-bind="level[0]['project']"></div>
+        <div class="level_item" >
+          <span class="lab" ng-repeat="item in level" ng-bind="item['name']">水平特点特点</span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

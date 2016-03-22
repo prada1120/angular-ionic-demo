@@ -1,0 +1,38 @@
+
+<div class="wrap" on-finish-render>
+
+  <div class="wrp xiang">
+    <ul>
+      <li ng-click="isProjectShow = !isProjectShow">{{projectName}}<span class="icon">&#xe60b;</span>
+        <div class="xiang_fen toggle" ng-show="isProjectShow">
+          <ul>
+            <li><a href="javascript:void (0);" ng-click="projectChange(0,'不限')">不限</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(1,'足球')">足球</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(2,'篮球')">篮球</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(3,'网球')">网球</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(4,'乒乓球')">乒乓球</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(5,'羽毛球')">羽毛球</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(6,'高尔夫')">高尔夫</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(7,'斯诺克')">斯诺克</a></li>
+            <li><a href="javascript:void (0);" ng-click="projectChange(8,'美式台球')">美式台球</a></li>
+          </ul>
+        </div>
+      </li>
+      <li style="width: 67%;"><div class="wr search"><input class="icon" ng-model="serchMacth" ng-change="inputChange()" placeholder="&#xe622;Search" type="text"></div></li>
+      <div class="clear"></div>
+    </ul>
+  </div>
+</div>
+<div class="wrap app">
+
+  <figure class="che" ng-repeat="match in matchs" ng-if="matchs.length>0">
+    <a ui-sref="match.detail({match_id:match.id,me_id:match.me_id})">
+      <img ng-src="{{staticUrl+match.cover}}" style="min-height: 180px;">
+      <figcaption>
+        <h1 ng-bind="match.name"></h1>
+      </figcaption>
+    </a>
+  </figure>
+
+</div>
+

@@ -1,0 +1,55 @@
+<ion-view title="编辑活动" >
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear button-light icon ion-ios-arrow-left" ui-sref="activity.detail()"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-clear" ng-click="submitEdit()" >确定</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-scroll class="has-header" style="display: inline;">
+    <div class="list ">
+      <label class="item item-input">
+        <span class="input-label">活动名称</span>
+        <input class="text_color_888" ng-model="activity.title" type="text" placeholder="为它起个响亮的标题吧">
+      </label>
+      <label class="item item-input item-icon-right" ng-if="activity.type==1">
+        <span class="input-label">活动分类</span>
+        <input class="background-fff" on-touch="showTypePopup()" disabled type="text" ng-model="activity.project_name" placeholder="选择活动分类">
+        <i class="icon ion-chevron-right icon-accessory" on-touch="showTypePopup()"></i>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">地点：</span>
+        <input class=" text_color_888" ng-model="activity.address" type="text" placeholder="活动详情地点">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">人数：</span>
+        <input class=" text_color_888" ng-model="activity.num" type="text" placeholder="活动人数">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">费用：</span>
+        <input class=" text_color_888" ng-model="activity.fee" type="text" placeholder="活动费用">
+      </label>
+    </div>
+    <div class="list ">
+
+      <div class="item item-input item-icon-right">
+        <span class="input-label">报名截止时间</span>
+        <select class="common-select" ng-model="activity.deadlineDay" ng-options="day.value as day.text for day in days"></select>
+        <select class="common-select" ng-model="activity.deadlineHours" ng-options="hour for hour in hours" ></select>
+      </div>
+      <div class="item item-input item-icon-right">
+        <span class="input-label">活动时间</span>
+        <select class="common-select" ng-model="activity.openDay" ng-options="day.value as day.text for day in days"></select>
+        <select class="common-select" ng-model="activity.openHours" ng-options="hour for hour in hours" ></select>
+      </div>
+    </div>
+    <div class="list ">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">活动详情</span>
+        <textarea class="no-resize ng-valid ng-touched ng-dirty ng-valid-parse" rows="8" placeholder="来一段最能打动ta的话" ng-model="activity.description"></textarea>
+      </label>
+    </div>
+  </ion-scroll>
+</ion-view>

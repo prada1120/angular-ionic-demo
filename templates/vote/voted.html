@@ -1,0 +1,24 @@
+<ion-view on-finish-render>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="vote.detail({vote_id:vote.vote_id})">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" ng-bind="option.title"></h1>
+
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+
+    <div class="list">
+      <ul id="vote">
+        <li ng-repeat="log in logs" ui-sref="member.info({member_id:log.uid})">
+          <p>
+            <img class="avatar_img-54" ng-src="{{log.uavatar|imgFilter:200}}" >
+            <span ng-bind="log.uname"></span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </ion-content>
+</ion-view>

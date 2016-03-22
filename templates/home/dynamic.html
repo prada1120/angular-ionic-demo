@@ -1,0 +1,78 @@
+<ion-view>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ng-click="goBack()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title">动态</h1>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <div class="wrap">
+      <div class="item-avatar-left" >
+        <img ng-src="{{dynamic.avatar|imgFilter:100}}">
+        <div class="dynamic-team-info">
+          <span ng-bind="dynamic.name"></span><br>
+          <span class="text_color_grey_12" am-time-ago="dynamic.time*1000"></span>
+        </div>
+      </div>
+      <div class=" dynamic_dtl">
+        <article >
+          <p class="home_dynamic" ng-bind-html="dynamic.title|trustHtml" ></p>
+        </article>
+      </div>
+      <div class="row" ng-repeat="imgs in dynamic.imgs">
+        <div class="col col-33 icon_img sns-img" ng-repeat="img in imgs">
+          <img ng-src="{{img|imgFilter:300:120:120:6}}" src="images/letu.png" on-touch="show(img,dynamic.imgs)">
+        </div>
+      </div>
+      <section class="wrap">
+        <section class="wrap zan bottom_nav1">
+          <section class="shou_bu shou_bu1 comments">
+            <h1>交流区</h1>
+            <dl ng-if="comments.length<1">还没有人评论过，赶快抢沙发吧！</dl>
+            <dl ng-repeat="comment in comments" ng-if="comments.length>0">
+              <dt><img ui-sref="member.info({member_id:comment.uid})" class="avatar_img-54" ng-src="{{comment.uavatar|imgFilter:200}}"></dt>
+              <dd>
+                <h2 ui-sref="member.info({member_id:comment.uid})" >{{comment.uname}}<span ng-bind="comment.from_time"></span></h2>
+                <p ng-bind="comment.topic"></p>
+              </dd>
+              <div class="clear"></div>
+              <div class="zan_miao">
+                <div class="left">
+                  <p class="icon">
+                    <a ng-class="{'zhan':true,'zhanz':comment.is_hit}" href="javascript:void (0);" ng-click="addCommentHit(comment)">
+                      <b class="icon inn1"></b>
+                      <em>(<span ng-bind="comment.hits"></span>)</em>
+                    </a>
+                  </p>
+                </div>
+                <div class="right icd" ng-click="preReplie(comment.id,comment.uname);"><span class="icon ic1 ion-ios-chatbubble-outline"></span>回复</div>
+                <div class="clear"></div>
+              </div>
+              <div class="hui_content" ng-if="comment.nums">
+                <dl ng-repeat="reply in comment.replys">
+                  <dt><img ui-sref="member.info({member_id:reply.uid})" class="avatar_img" ng-src="{{reply.uavatar|imgFilter:200}}"></dt>
+                  <dd>
+                    <h2>
+                      <span ui-sref="member.info({member_id:reply.uid})">{{reply.uname}}<span ng-bind="reply.form_time"></span></span>
+                    </h2>
+                    <p ng-click="preReplie(comment.id,reply.uname);"  ng-bind="reply.content"></p>
+                  </dd>
+                  <div class="clear"></div>
+                </dl>
+              </div>
+            </dl>
+          </section>
+        </section>
+      </section>
+    </div>
+  </ion-content>
+  <div class="bottom bottom_position">
+    <dl class="pin">
+      <dt><input style="min-height: 36px; height: 36px;" class="button" readonly type="text" placeholder="我也来说两句" ng-click="preReplie();"></dt>
+      <dd><button style="height: 36px;"><span class="icon ion-chatbubbles"></span>{{comments.length}}</button></dd>
+      <div class="clear"></div>
+    </dl>
+  </div>
+</ion-view>

@@ -1,0 +1,118 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="liveList()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" ng-bind="score.name"></h1>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <article id="match_score">
+      <div class="score_detail">
+        <img src="http://m.letusport.com/img/match_score_logo_{{score.data_type}}.png">
+        <h3 ng-bind="score.name">Hero World Challenge</h3>
+        <p>
+          <span ng-bind="score.date"></span>
+          <br>
+          <span ng-bind="score.venue"></span>
+        </p>
+      </div>
+      <ul class="title">
+        <li>
+          <span>排名</span>
+          <span>国家</span>
+          <span>球员</span>
+        </li>
+        <li>
+          <span>TD</span>
+
+          <span>R1</span>
+          <span>R2</span>
+          <span>R3</span>
+          <span>TU</span>
+        </li>
+      </ul>
+      <ul class="list">
+        <li ng-repeat="item in score.items">
+          <ul ng-click="item.is_detail=!item.is_detail">
+            <li>
+              <span ng-bind="item.pos"></span>
+              <span><img ng-src="{{item.country}}" ></span>
+              <span ng-bind="item.player_name">巴巴·沃森</span>
+            </li>
+            <li>
+              <span ng-bind="item.r1"></span>
+              <span ng-bind="item.r3"></span>
+              <span ng-bind="item.r4"></span>
+              <span ng-bind="item.tot"></span>
+              <span ng-bind="item.r2"></span>
+            </li>
+          </ul>
+          <div class="list_details" ng-class="{'none':!item.is_detail||score.data_type!=102}">
+            <img ng-src="{{score_data[item.player_id]['profile_data'][0]}}" >
+            <div class="list_details_right">
+              <div class="list_details_right_top">
+                <span ng-class="{'active':!item.is_profile}" ng-click="item.is_profile=false">Scorecard</span>
+                <span ng-class="{'active':item.is_profile}" ng-click="item.is_profile=true" >Profile</span>
+                <!--<a><img src="img/cha.png" width="15" height="15"></a>-->
+              </div>
+              <div ng-class="{'none':item.is_profile}">
+                <div class="list_details_right_bottom">
+                  <div class="round-nav">
+                    <p>Round:</p>
+                    <a ng-click="selectRound(score,score_data[item.player_id]['score_data'])" ng-repeat="score in score_data[item.player_id]['score_data']" ng-class="{'round-nav-background':score.is_current}" href="#">{{$index+1}}</a>
+                  </div>
+                </div>
+                <div class="legend">
+                  <p><i class="eagle"></i>Eagle</p>
+                  <p><i class="birdie"></i>Birdie</p>
+                  <p><i class="bogey"></i>Bogey</p>
+                  <p><i class="double"></i>Double Bogey or Worse</p>
+                  <div class="clear"></div>
+                  <div class="lb">
+                    <ul class="hole">
+                      <li style="width: 10% !important;">
+                        <p>hole</p>
+                      </li>
+                      <li><p>1</p></li>
+                      <li><p>2</p></li>
+                      <li><p>3</p></li>
+                      <li><p>4</p></li>
+                      <li><p>5</p></li>
+                      <li><p>6</p></li>
+                      <li><p>7</p></li>
+                      <li><p>8</p></li>
+                      <li><p>9</p></li>
+                      <li style="width: 9% !important;"><p>OUT</p></li>
+                      <li><p>10</p></li>
+                      <li><p>11</p></li>
+                      <li><p>12</p></li>
+                      <li><p>13</p></li>
+                      <li><p>14</p></li>
+                      <li><p>15</p></li>
+                      <li><p>16</p></li>
+                      <li><p>17</p></li>
+                      <li><p>18</p></li>
+                      <li style="width: 4.7% !important;"><p>IN</p></li>
+                      <li style="width: 7.9% !important;"><p>TOT</p></li>
+                    </ul>
+                    <ul class="score_data" ng-class="{'none':!score.is_current}" ng-repeat="score in score_data[item.player_id]['score_data'] track by $index">
+
+                      <li ng-repeat="par in score.pars track by $index">
+                        <p ng-bind="par"></p>
+                        <p class="score_color_{{score.scores[$index]['type']}}" ng-bind="score.scores[$index]['score']"></p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="profile_data" ng-class="{'none':!item.is_profile}">
+               <p ng-bind="profile" ng-if="$index!=0" ng-repeat="profile in score_data[item.player_id]['profile_data']"></p>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+        </li>
+      </ul>
+    </article>
+  </ion-content>
+</ion-view>

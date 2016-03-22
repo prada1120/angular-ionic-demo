@@ -1,0 +1,80 @@
+<ion-view cache-view="false">
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="inviteList()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" ng-bind="invite.title"></h1>
+    <div class="buttons buttons-right header-item" ng-if="invite.is_priv" on-touch="showDetailOpt($event)">
+      <button class="button button-clear icon ion-navicon"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header has-footer">
+    <div class="wrap">
+      <div class="jbkq_top_text dibu_xt">
+        <h3 class="yjhd_bottom_biaoti">
+          <span class="text_color_blue_icon" ng-if="invite.invite_type==1" >约球队&nbsp;|</span>
+          <span class="text_color_blue_icon" ng-if="invite.invite_type==2" >约个人&nbsp;|</span>
+          <span class="text_color_blue_icon">[<span  ng-bind="invite.project_name"></span>]</span><span ng-bind="invite.title"></span></h3>
+        <p class="topiaosj">发布时间{{timedata}}：<span ng-bind="invite.time*1000|date : 'yyyy-MM-dd HH:mm'"></span></p>
+        <p ng-if="invite.invite_type==1">发起者：<span class="xingming" ui-sref="team.detail({team_id:invite.uid})" ng-bind="invite.uname"></span></p>
+        <p ng-if="invite.invite_type==2">发起者：<span class="xingming" ui-sref="member.info({member_id:invite.uid})" ng-bind="invite.uname"></span></p>
+        <p>联系人：<span class="xingming" ng-bind="invite.name"></span></p>
+        <p>联系电话：<span class="xingming" ng-bind="invite.contact"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt">
+        <p class="topiaosj">打球时间：<span ng-bind="invite.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span></p>
+        <p class="topiaosj">场    地：<span ng-bind="invite.address"></span></p>
+        <p class="topiaosj">费    用：<span ng-bind="invite.fee"></span></p>
+        <p class="topiaosj">类    型：<span ng-bind="invite.type"></span></p>
+        <p class="topiaosj">备注：<span ng-bind="invite.comment"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt invite_members" ng-if="invite.invite_type==1">
+
+        <h3 class="cydr text_color_blue_icon">已通过报名 ( <b ng-bind="passed_count"></b> )</h3>
+        <ul>
+          <li ng-repeat="member in passed"  >
+              <img class="avatar_img-54 margin-left-10" ng-src="{{member.avatar|imgFilter:100}}" ui-sref="team.detail({team_id:member.team_id})">
+          </li>
+        </ul>
+        <h3 class="cydr text_color_blue_icon">未通过报名 ( <b ng-bind="no_passed_count"></b> )</h3>
+        <ul>
+          <li ng-repeat="member in no_passed"  >
+            <img class="avatar_img-54 margin-left-10"  ng-src="{{member.avatar|imgFilter:100}}" ui-sref="team.detail({team_id:member.team_id})">
+          </li>
+        </ul>
+        <h3 class="cydr text_color_blue_icon">待审核报名 ( <b ng-bind="wait_count"></b> )</h3>
+        <ul>
+          <li ng-repeat="member in wait"  >
+            <img class="avatar_img-54 margin-left-10"  ng-src="{{member.avatar|imgFilter:100}}" ui-sref="team.detail({team_id:member.team_id})">
+          </li>
+        </ul>
+      </div>
+      <div class="jbkq_top_text dibu_xt invite_members" ng-if="invite.invite_type==2">
+
+        <h3 class="cydr text_color_blue_icon">已通过报名 ( <b ng-bind="passed_count"></b> )</h3>
+        <ul >
+          <li ng-repeat="member in passed" >
+            <P><img class="avatar_img-54 margin-left-10" ui-sref="member.info({member_id:member.uid})"  ng-src="{{member.avatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+        <h3 class="cydr text_color_blue_icon">未通过报名 ( <b ng-bind="no_passed_count"></b> )</h3>
+        <ul  >
+          <li ng-repeat="member in no_passed" >
+            <P><img class="avatar_img-54 margin-left-10" ui-sref="member.info({member_id:member.uid})" ng-src="{{member.avatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+        <h3 class="cydr text_color_blue_icon">待审核报名 ( <b ng-bind="wait_count"></b> )</h3>
+        <ul  >
+          <li ng-repeat="member in wait" >
+            <P><img class="avatar_img-54 margin-left-10" ui-sref="member.info({member_id:member.uid})" ng-src="{{member.avatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </ion-content>
+  <div class="bar bar-footer dibu">
+    <button ng-disabled="invite.is_sign||invite.is_priv||invite.is_end" ng-class="{'disabled':invite.is_sign||invite.is_priv||invite.is_end}" ng-click="sign()">应战</button>
+  </div>
+</ion-view>

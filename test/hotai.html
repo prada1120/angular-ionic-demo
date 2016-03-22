@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style>
+    *{ margin: 0; padding: 0; font-family: 微软雅黑;}
+    ul,li{ list-style: none;}
+    input{list-style: none;}
+    .clear{clear: both;}
+    .state{color: #818181; line-height: 30px; font-size: 18px;}
+
+    .content{ width: 865px; margin-bottom: 20px; overflow: hidden;font-size: 12px;}
+    .content_title{line-height: 32px; background: #f4f5f9; overflow: hidden; border: 1px solid #ececec;}
+    .toggle{
+        background: #fff;
+    }
+    .question_title{
+        margin-left: 10px;
+    }
+    .content p:nth-child(1){float: left; color: #3a3a3a; padding-left: 10px;}
+    .content p:nth-child(2) span{ padding-left: 10px;}
+    .content p:nth-child(2){ float: right; color: #4d8cbd; padding-right: 10px;}
+    .content ul li{ padding-top: 8px; line-height: 44px;overflow: hidden}
+    .content ul{
+        border: 1px solid #ECECEC;
+        border-top: none;
+    }
+    .content ul li span{ width: 130px; float: left; text-align: center; display: block;line-height: 32px;}
+    .content ul li input{ float: left; width: 426px; height: 32px; border: 1px solid #ececec;}
+    .sc_button{position: relative;float: left; line-height: 32px; text-align: center;height: 32px; width: 141px; background: #5ccfe6; margin-left: 10px; color: #fff;}
+    .sc_button input{ position: absolute; left: 0; top: 0;height: 32px; width: 141px;opacity: 0;}
+    .dx input{ width:22px !important; height:12px !important; float: none !important;}
+    .delete{ color:#4d8cbd;}
+    .content ul li .sc_img{height: 32px; border: 1px solid #ececec; width:141px; text-align: center; line-height: 32px; margin-left: 10px; color: #fff; border-radius: 4px; background: #5ccfe6;}
+    .content3 p{ text-align: center; width: 865px; line-height: 32px; border: 1px solid #ececec; margin-bottom: 20px;font-size: 12px;}
+    .state{ font-size: 12px;}
+</style>
+<body>
+<div class="content">
+    <div class="content_title toggle">
+        <p>
+            <span>问题一</span>
+            <span class="question_title">标题</span>
+        </p>
+        <p>收起</p>
+    </div>
+</div>
+<div class="content">
+    <div class="content_title ">
+        <p>
+            <span >问题一</span>
+            <span class="question_title">标题</span>
+        </p>
+        <p>编辑</p>
+    </div>
+    <ul>
+        <li>
+            <span>标题</span>
+            <input type="text">
+        </li>
+        <div class="clear"></div>
+        <li class="dx">
+            <span>&nbsp;</span>
+            <input type="radio" name="RadioGroup1" value="单选">单选
+            <input type="radio" name="RadioGroup1" value="单选">多选
+        </li>
+        <div class="clear"></div>
+        <li>
+            <span>选项一</span>
+            <input type="text">
+            <div class="sc_button"><input name="" type="file" class="sc_img">+上传图片</div>
+        </li>
+        <div class="clear"></div>
+        <li>
+            <span>选项二</span>
+            <input type="text">
+            <div class="sc_button"><input name="" type="file" class="sc_img">+上传图片</div>
+        </li>
+        <div class="clear"></div>
+        <li>
+            <span>选项三</span>
+            <input type="text">
+            <div class="sc_button"><input name="" type="file" class="sc_img">+上传图片</div>
+            <span class="delete">删除选项</span>
+        </li>
+        <div class="clear"></div>
+        <li class="border_top">
+            <span class="delete">添加选项</span>
+        </li>
+    </ul>
+</div>
+<div class="content3">
+    <p>+添加问题</p>
+</div>
+</body>
+</html>

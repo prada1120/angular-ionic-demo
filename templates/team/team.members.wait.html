@@ -1,0 +1,29 @@
+<ion-view view-title="" on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.detail()">
+      <button class="button button-clear icon ion-ios-arrow-left">球队</button>
+    </div>
+    <h1 class="title">审核列表</h1>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <ion-list>
+      <div class="item-divider-ios">待审核</div>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="member in members" ng-if="member.state==0" type="item-text-wrap">
+        <img ui-sref="member.info({member_id:member.uid})" ng-src="{{member.uavatar|imgFilter:200}}">
+        <h3 ui-sref="member.info({member_id:member.uid})">{{member.uname}}</h3>
+        <p >申请理由：<span ng-bind="member.content"></span></p>
+        <i class="icon ion-chevron-down icon-accessory" ng-click="showOpt(member,$index)" ng-if="teamInfo.priv>2"></i>
+      </ion-item>
+
+      <div class="item-divider-ios ">已拒绝</div>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="member in members" ng-if="member.state==2" type="item-text-wrap">
+        <img ui-sref="member.info({member_id:member.uid})" ng-src="{{member.uavatar|imgFilter:200}}">
+        <h3 ui-sref="member.info({member_id:member.uid})" >{{member.uname}}</h3>
+        <p ng-bind="member.job_name"></p>
+        <i class="icon ion-chevron-down icon-accessory" ng-click="showOpt(member,$index)" ng-if="teamInfo.priv>2"></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

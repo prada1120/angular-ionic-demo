@@ -1,0 +1,9 @@
+<ion-popover-view style="width: 120px;">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="tab in tabs" ng-click="projectChange(tab.value,tab.lab)">
+        {{tab.lab}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-popover-view>

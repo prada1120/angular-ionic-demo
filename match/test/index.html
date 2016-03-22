@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript" src="__TPL__/js/zepto.min.js" ></script>
+<body>
+<button style="width: 200px;height: 200px;background-color: #002a80" onclick="window.webview.showToast('ceshi');"></button>
+<span style="width: 10px;height: 20px" id="ceshi">ceshi</span>
+<script>
+    $(function(){
+        alert(11);
+    })
+
+    function changeButten(name){
+        document.getElementById('ceshi').innerHTML = name;
+    }
+
+</script>
+</body>
+</html>

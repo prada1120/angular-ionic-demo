@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+    <script src="../js/debuggap.js" type="text/javascript"></script>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+</head>
+<style>
+    .input_uploadAvatar{
+        opacity: 0;
+    }
+</style>
+<body>
+<div class="bar bar-header bar-positive">
+    <h1 class="title">bar-positive</h1>
+</div>
+<div class="login">
+    <div class="modal">
+        <ion-content scroll="false">
+
+            <div class="buttons header-item login-close" on-touch="loginModal.hide();">
+                <i class="icon ion-ios-close-empty"></i>
+            </div>
+            <div class="tabs tabs-top tabs-striped tabs-color-light">
+                <div class="tab-item" ng-class="{'active':login.type==1}" on-touch="login.type=1">
+                    登录
+                </div>
+                <div class="tab-item" ng-class="{'active':login.type==2}" on-touch="login.type=2">
+                    短信登录
+                </div>
+            </div>
+
+            <div class="list" ng-if="login.type==1">
+                <div class="item item-input-wrapper">
+                    <i class="icon icon-people placeholder-icon"></i>
+                    <input type="tel" placeholder="手机号码" pattern="[0-9]*" ng-model="login.phone" maxlength="11">
+                </div>
+
+                <div class="item item-input-wrapper" >
+                    <i class="icon icon-mima placeholder-icon"></i>
+                    <input type="password" placeholder="密码" ng-model="login.password">
+                </div>
+                <div class="item login-btn" on-touch="loginAction()">
+                    登陆
+                </div>
+                <span class="other">---免注册登陆方式---</span>
+                <div class="wechat" ng-click="wechatLogin()"></div>
+            </div>
+            <div class="list" ng-if="login.type==2">
+                <div class="item item-input-wrapper">
+                    <i class="icon icon-login-phone placeholder-icon"></i>
+                    <input type="tel" placeholder="手机号码" pattern="[0-9]*" ng-model="login.phone" maxlength="11" ng-change="validatePhone(login.phone)">
+                    <span class="sms sms-active" on-touch="sendSms()" ng-if="login.isCanSms">获取验证码</span>
+                    <span class="sms" ng-if="!login.isCanSms&&!isTime">获取验证码</span>
+                    <span class="sms" ng-if="!login.isCanSms&&isTime" ><b ng-bind="countdown">60</b>秒后重新获取</span>
+                </div>
+                <div class="item item-input-wrapper">
+                    <i class="icon icon-login-sms placeholder-icon"></i>
+                    <input type="tel" id="sms" placeholder="短信验证码" ng-model="login.code" maxlength="4" pattern="[0-9]*" onchange="">
+                </div>
+                <div class="item login-btn" on-touch="loginAction()">
+                    登陆
+                </div>
+            </div>
+        </ion-content>
+    </div>
+</div>
+</body>
+</html>

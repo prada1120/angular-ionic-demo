@@ -1,0 +1,53 @@
+<ion-view title="编辑球队" on-finish-render>
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="left">
+      <button class="button button-clear button-light icon ion-ios-arrow-left" ui-sref="team.detail()">球队</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-clear" on-touch="submitEdit()" >确定</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="has-header">
+    <div class="list">
+      <div class="item item-icon-right" on-touch="showNameEdit(1)">
+        <span>球队名：<span ng-bind="teamInfo.name"></span></span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+      <label class="item item-input item-avatar-right ">
+        <img ng-src="{{teamInfo.avatar|imgFilter:100}}">
+        <span class="input-label">球队logo:</span>
+        <input  class="input_uploadAvatar" ngf-resize="{width: 100, height: 100, quality: 0.9}" ngf-select="upload($file,1)" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" type="file">
+      </label>
+      <div class="item item-input row" style="padding: 8px 15px;">
+        <span class="input-label">球队地点：</span>
+        <select class="col common-select" ng-model="teamInfo.province" ng-options="province.name for province in provinceData"></select>
+        <select class="col common-select" ng-model="teamInfo.city" ng-options="city.name for city in cityData" ></select>
+        <select class="col common-select" ng-model="teamInfo.district" ng-options="district.name for district in districtData" ></select>
+      </div>
+      <label class="item item-icon-right" on-touch="showEdit(1)">
+        <span>球队介绍：<span ng-bind-html="teamInfo.description_strip|trustHtml"></span></span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </label>
+    </div>
+    <div class="list">
+      <label class="item item-input item-avatar-right ">
+        <img ng-src="{{teamInfo.qiuyi|imgFilter:100}}">
+        <span class="input-label">球衣照片</span>
+        <input class="input_uploadAvatar" ngf-select="upload($file,2)" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" type="file" >
+      </label>
+      <label class="item item-icon-right" on-touch="showEdit(2)">
+        <span>球队章程：<span ng-bind="teamInfo.zhangcheng"></span></span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </label>
+    </div>
+    <div class="list">
+      <label class="item item-input item-avatar-right">
+        <img  ng-src="{{teamInfo.banner|imgFilter:101}}">
+        <span class="input-label">球队banner</span>
+        <input class="input_uploadAvatar" ngf-select="upload($file,3)" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" type="file" >
+      </label>
+    </div>
+
+  </ion-content>
+</ion-view>

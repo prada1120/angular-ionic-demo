@@ -1,0 +1,87 @@
+<ion-view view-title="用户中心">
+  <ion-nav-bar class="bar-blue">
+    <ion-nav-buttons side="left">
+      <button class="button button-light button-icon icon ion-ios-arrow-left" ng-click="goBack()"></button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="has-header">
+    <div class="list no-margin" >
+      <div class="item item-image item-icon-right">
+        <img ng-src="{{member.avatar|imgFilter:200}}" class="avatar_img-70">
+        <h2 class="user-center-name"><span ng-bind="member.real_name"></span>
+          <i class="iconfont  text_color_green" ng-class="{'icon-male':member.sex!=2,'icon-female':member.sex==2}"></i>
+        </h2>
+        <i class="icon text_color_blue_icon" ng-class="{'icon-hxguanzhu':member.each_attention&&member.is_attention,'icon-jiaguanzhu':!member.is_attention,'icon-yiguanzhu':!member.each_attention&&member.is_attention}" ng-click="optAttention(member);"></i>
+        <p class="user-center-location"><i class="iconfont icon-location text_color_green"></i><span ng-bind="member.city_str"></span></p>
+      </div>
+
+      <div class="item row user-center-panel">
+        <div class="col" ui-sref="member.attention()">
+          <p>关注</p>
+          <strong ng-bind="member.attention_num"></strong>
+        </div>
+        <div class="col" ui-sref="member.fans()">
+          <p>粉丝</p>
+          <strong ng-bind="member.fans_num"></strong>
+        </div>
+        <div class="col" ui-sref="member.invite()">
+          <p>约战</p>
+          <strong ng-bind="member.invite_num"></strong>
+        </div>
+        <div class="col" ui-sref="member.team()">
+          <p>球队</p>
+          <strong ng-bind="member.team_num"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="list" style="margin-bottom: 0px;">
+      <div class="item item-icon-right padding" ui-sref="member.level()">
+        <div class="Individual-icon-size Individual-icon-two"></div>
+        <span class="img-icon-span Individual-height">水平特点</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </div>
+    </div>
+    <div class="list home">
+      <div ng-repeat="user in member.logs">
+        <div class="item margin-top-10 padding_rf_5">
+          <div class="item-avatar-left no-min-height">
+            <img ng-src="{{user.avatar|imgFilter:100}}" >
+            <h2 ng-bind="user.name"></h2>
+            <span class="text_color_grey_12" am-time-ago="user.time*1000"></span>
+          </div>
+          <div class="row" >
+            <p class="home_dynamic" jump-params="{id:{{user.log_id}}}" jump-url="home.dynamic" ng-bind-html="user.title|trustHtml"></p>
+          </div>
+          <div class="row no-padding" ng-repeat="imgs in user.imgs" ng-if="user.imgs.length==1">
+            <div class="col icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,user.imgs)">
+              <img ng-src="{{img|imgFilter:300:180:180:7}}" >
+            </div>
+          </div>
+          <div class="row no-padding" ng-repeat="imgs in user.imgs" ng-if="user.imgs.length!=1&&$index<3" >
+            <div class="col col-33 icon_img sns-img" ng-repeat="img in imgs" ng-click="show(img,user.imgs)">
+              <img ng-src="{{img|imgFilter:300:120:120:6}}" >
+            </div>
+          </div>
+        </div>
+        <div class="row home-tool-bar">
+          <div class="col">
+            <i class="icon icon-attention icon_color"></i>
+            <span  ng-bind="user.views"></span>
+          </div>
+          <div class="col" ui-sref="home.dynamic({id:user.log_id})">
+            <i class="icon icon-pinglun icon_color"></i>
+            <span ng-bind="user.comments"></span>
+          </div>
+          <div class="col" ng-click="hitDynamic(user)">
+            <i class="icon icon-zan icon_color" ng-class="{'icon-zand':user.is_hit,'text_color_blue_icon':user.is_hit}"></i>
+            <span ng-bind="user.hits"></span>
+          </div>
+        </div>
+
+      </div>
+      <div class="member_dynamic_more" ui-sref="member.dynamic()" ng-if="member.logs.length>5" >
+        <p>点击查看更多</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

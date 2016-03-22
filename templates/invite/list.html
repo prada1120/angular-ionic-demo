@@ -1,0 +1,90 @@
+<ion-view title="约战">
+  <ion-side-menus>
+    <ion-side-menu-content>
+      <ion-header-bar class="bar-blue">
+        <div class="buttons buttons-left header-item"  ui-sref="tab.find()">
+          <button class="button button-clear icon ion-ios-arrow-left"></button>
+        </div>
+        <h1 class="title">约战</h1>
+        <div class="buttons buttons-right header-item" >
+          <button class="button button-clear button-icon icon icon-caidan" menu-toggle="right"></button>
+        </div>
+      </ion-header-bar>
+      <ion-content class="has-header">
+
+        <ion-refresher pulling-text="下拉可以刷新" on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list>
+          <ion-item class="item-avatar-left item-activity item-icon-right" collection-repeat="invite in invites" type="item-text-wrap" >
+            <img reset-img ng-src="{{invite.uavatar|imgFilter:100}} ">
+            <h3 ui-sref="invite.detail({invite_id:invite.invite_id})"><span class="text_color_blue_icon">[<span  ng-bind="invite.project_name"></span>]</span><span ng-bind="invite.title"></span></h3>
+            <p class="activity-size" ui-sref="invite.detail({invite_id:invite.invite_id})">
+              <span class="text_color_blue_icon" ng-bind="invite.invite_type_str"></span>&nbsp;|
+              <span ng-bind="invite.type"></span>&nbsp;|
+              <span ng-bind="invite.fee|bindFilter:'待定'" ></span>
+            </p>
+            <p  class="activity-size" ui-sref="invite.detail({invite_id:invite.invite_id})">
+              <span ng-bind="invite.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span>&nbsp;|<span ng-bind="invite.address"></span>
+            </p>
+            <i class="icon ion-chevron-right icon-accessory" ui-sref="invite.detail({invite_id:invite.invite_id})" ></i>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+        </ion-infinite-scroll>
+      </ion-content>
+    </ion-side-menu-content>
+    <ion-side-menu side="right">
+        <header class="bar bar-header bar-stable">
+          <div class="buttons buttons-left header-item" menu-toggle="right">
+            <button class="button button-clear text_color_grey">取消</button>
+          </div>
+          <h1 class="title">筛选</h1>
+          <div class="buttons buttons-right header-item"  on-touch="createInvite()"  menu-close>
+            <button class="button button-clear text_color_grey">新建</button>
+          </div>
+        </header>
+        <ion-content class="has-header">
+          <div class="lists">
+            <div class="item">
+              <span style="float: left">项目</span>
+              <div class="menu-tabs">
+                <span ng-repeat="tab in tabs" on-touch="selectTab(tab)" ng-class="{'ion-android-done':tab.value==path.project,'active':tab.value==path.project}"  ng-bind="tab.lab"></span>
+              </div>
+            </div>
+            <div class="item-divider-sm"></div>
+            <div class="item">
+              <span style="float: left">状态</span>
+              <div class="menu-tabs">
+                <span on-touch="selectState(0)" ng-class="{'ion-android-done':path.state==0,'active':path.state==0}">全部</span>
+                <span on-touch="selectState(1)" ng-class="{'ion-android-done':path.state==1,'active':path.state==1}">进行中</span>
+                <span on-touch="selectState(2)" ng-class="{'ion-android-done':path.state==2,'active':path.state==2}">已结束</span>
+              </div>
+            </div>
+            <div class="item" ng-if="path.state!=0">
+              <span style="float: left">时间</span>
+              <div class="menu-tabs">
+                <span  on-touch="selectTime(0)" ng-class="{'ion-android-done':path.time==0,'active':path.time==0}">全部</span>
+                <span ng-if="path.state==1" on-touch="selectTime(1)" ng-class="{'ion-android-done':path.time==1,'active':path.time==1}">今天</span>
+                <span ng-if="path.state==1" on-touch="selectTime(2)" ng-class="{'ion-android-done':path.time==2,'active':path.time==2}">周末</span>
+                <span ng-if="path.state==1" on-touch="selectTime(3)" ng-class="{'ion-android-done':path.time==3,'active':path.time==3}">3天内</span>
+                <span ng-if="path.state==1" on-touch="selectTime(4)" ng-class="{'ion-android-done':path.time==4,'active':path.time==4}">1周内</span>
+                <span ng-if="path.state==1" on-touch="selectTime(5)" ng-class="{'ion-android-done':path.time==5,'active':path.time==5}">1个月内</span>
+                <span ng-if="path.state==2" on-touch="selectTime(11)" ng-class="{'ion-android-done':path.time==11,'active':path.time==11}">3天内</span>
+                <span ng-if="path.state==2" on-touch="selectTime(12)" ng-class="{'ion-android-done':path.time==12,'active':path.time==12}">一周内</span>
+                <span ng-if="path.state==2" on-touch="selectTime(13)" ng-class="{'ion-android-done':path.time==13,'active':path.time==13}">1个月内</span>
+                <span ng-if="path.state==2" on-touch="selectTime(14)" ng-class="{'ion-android-done':path.time==14,'active':path.time==14}">3个月内</span>
+              </div>
+            </div>
+            <div class="item-divider"></div>
+            <div class="item btn-blue" on-touch="search()" menu-close>
+              搜索
+            </div>
+            <div class="search-create" on-touch="createInvite()"menu-close>
+              ----------<span>我要发起约战</span>----------
+            </div>
+          </div>
+        </ion-content>
+    </ion-side-menu>
+
+</ion-side-menus>
+</ion-view>

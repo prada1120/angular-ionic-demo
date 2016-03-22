@@ -1,0 +1,64 @@
+
+<div class="modal">
+
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="editLevelModal.hide()">取消</button>
+		</div>
+
+		<h1 class="title">水平特点</h1>
+
+		<div class="buttons">
+			<button class="button button-clear" on-touch="edit()">确定</button>
+		</div>
+
+	</ion-header-bar>
+
+	<ion-content scroll="false">
+
+		<div class="list level-modal">
+			<div class="item list-row row text-center bar-stable">
+				<div class="col border_right">
+					项目
+				</div>
+				<div class="col border_right">
+					水平
+				</div>
+				<div class="col">
+					特点
+				</div>
+			</div>
+			<div class="item row row-text">
+				<div class="col col-33">
+					<ion-scroll scrollbar-y=false >
+						<ul class="screening">
+							<li ng-class="{'ion-android-done':tab.is_selected,'color-blue':$index==selectTypeIndex,'active':$index==selectTypeIndex}" on-touch="selectType(tab,$index)" ng-repeat="tab in tabs">
+								<span ng-bind="tab.lab" ></span>
+							</li>
+						</ul>
+					</ion-scroll>
+				</div>
+				<div class="col col-33" >
+					<ion-scroll scrollbar-y=false >
+						<ul class="screening">
+							<li ng-class="{'ion-android-done':level.is_selected,'color-blue':level.is_selected}" on-touch="selectLevel(level,$index)" ng-repeat="level in levels">
+								<span ng-bind="level.title" ></span>
+							</li>
+						</ul>
+					</ion-scroll>
+				</div>
+				<div class="col col-33">
+					<ion-scroll scrollbar-y=false>
+						<ul class="screening">
+							<li ng-class="{'ion-android-done':trait.is_selected,'color-blue':trait.is_selected}"  on-touch="selectTrait(trait,$index)" ng-repeat="trait in traits">
+								<span ng-bind="trait.title"></span>
+							</li>
+						</ul>
+					</ion-scroll>
+				</div>
+			</div>
+		</div>
+
+	</ion-content>
+
+</div>

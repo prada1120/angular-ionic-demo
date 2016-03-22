@@ -1,0 +1,28 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.albums()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" ng-bind="stateParams.album_name"></h1>
+    <div class="buttons buttons-right header-item" on-touch="showOpt()" ng-if="teamInfo.priv>0">
+      <button class="button button-clear icon" ng-bind="optName">编辑</button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doRefresh()">
+    </ion-refresher>
+    <div class="list">
+      <ul class="item has-badge xiangce_lb_img">
+        <li ng-repeat="img in imgs">
+          <img class="img-no-radius avatar_img-70" ng-click="show(img.img)" ng-src="{{img.img|imgFilter:100:180:180:7}}" >
+          <div class="xiance_gb_an" ng-show="shouldShowDelete" on-touch="removeAlbumImg(img,$index)">
+            <img src="images/xiance_gb_an.png" height="17" width="17">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

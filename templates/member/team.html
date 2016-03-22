@@ -1,0 +1,46 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="member.info({member_id:member_id})">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <div class="tab2">
+      <span class="col col-center" ng-class="{'tab_active':!tab2}" on-touch="tab2=false">
+        参与的球队
+      </span>
+      <span class="col col-center" ng-class="{'tab_active':tab2}" on-touch="tab2=true">
+        管理的球队
+      </span>
+    </div>
+    <h1 class="title top-tab-title"></h1>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <ion-list>
+
+      <ion-item class="item-avatar item-icon-right" ng-repeat="team in myJoinTeams" type="item-text-wrap" ng-show="!tab2">
+        <img reset-img ng-src="{{team.avatar|imgFilter:100}} " ui-sref="team.detail({team_id:team.id})">
+        <h3 ui-sref="team.detail({team_id:team.id})">{{team.name}}</h3>
+        <p ui-sref="team.detail({team_id:team.id})">
+          <span ng-bind="team.type"></span>
+          <span class="pont">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <span ng-bind="team.num"></span>人
+        </p>
+      </ion-item>
+
+      <ion-item class="item-avatar item-icon-right" ng-repeat="team in myTeams" type="item-text-wrap" ng-show="tab2">
+        <img reset-img ng-src="{{team.avatar|imgFilter:100}} " ui-sref="team.detail({team_id:team.id})">
+        <h3 ui-sref="team.detail({team_id:team.id})">{{team.name}}</h3>
+        <p ui-sref="team.detail({team_id:team.id})">
+          <span ng-bind="team.type"></span>
+          <span class="pont">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+          <span ng-bind="team.num"></span>人
+        </p>
+      </ion-item>
+
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+    </ion-infinite-scroll>
+
+  </ion-content>
+
+</ion-view>

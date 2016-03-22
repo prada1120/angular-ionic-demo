@@ -1,0 +1,46 @@
+<ion-view view-title="">
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="invite.detail()">
+      <button class="button button-clear icon ion-ios-arrow-left">球队</button>
+    </div>
+    <h1 class="title">审核列表</h1>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="lists" ng-if="invite.invite_type==1">
+      <div class="item-divider-ios">待审核</div>
+      <div class="item item-avatar item-icon-right" ng-repeat="member in members" ng-if="member.state==0" type="item-text-wrap">
+        <img ng-src="{{member.avatar|imgFilter:100}}">
+        <h3 >{{member.uname}}</h3>
+        <p >联系人：<span ng-bind="member.name"></span></p>
+        <p >联系方式：<span ng-bind="member.contact"></span></p>
+        <i class="icon ion-chevron-down icon-accessory" ng-click="showOpt(member,$index)" ng-if="invite.is_priv==1"></i>
+      </div>
+      <div class="item-divider-ios ">已拒绝</div>
+      <div class="item item-avatar item-icon-right" ng-repeat="member in members" ng-if="member.state==2" type="item-text-wrap">
+        <img ng-src="{{member.avatar|imgFilter:100}}">
+        <h3 >{{member.uname}}</h3>
+        <p >联系人：<span ng-bind="member.name"></span></p>
+        <p >联系方式：<span ng-bind="member.contact"></span></p>
+        <i class="icon ion-chevron-down icon-accessory" ng-click="showOpt(member,$index)" ng-if="invite.is_priv==1"></i>
+      </div>
+    </div>
+    <div class="lists" ng-if="invite.invite_type==2">
+      <div class="item-divider-ios">待审核</div>
+      <div class="item item-avatar item-icon-right" ng-repeat="member in members" ng-if="member.state==0" type="item-text-wrap">
+        <img ng-src="{{member.avatar|imgFilter:100}}">
+        <h3 >{{member.uname}}</h3>
+        <p >联系人：<span ng-bind="member.name"></span></p>
+        <p >联系方式：<span ng-bind="member.contact"></span></p>
+        <i class="icon ion-chevron-down icon-accessory" ng-click="showOpt(member,$index)" ng-if="invite.is_priv==1"></i>
+      </div>
+      <div class="item-divider-ios ">已拒绝</div>
+      <div class="item item-avatar item-icon-right" ng-repeat="member in members" ng-if="member.state==2" type="item-text-wrap">
+        <img ng-src="{{member.avatar|imgFilter:100}}">
+        <h3 >{{member.uname}}</h3>
+        <p >联系人：<span ng-bind="member.name"></span></p>
+        <p >联系方式：<span ng-bind="member.contact"></span></p>
+        <i class="icon ion-chevron-down icon-accessory" ng-click="showOpt(member,$index)" ng-if="invite.is_priv==1"></i>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+</head>
+<style>
+    .input_uploadAvatar{
+        opacity: 0;
+    }
+    .input_border{ border: 1px solid #ccc !important; border-radius: 4px !important; width: 100% !important;}
+    .input_border1{border: 1px solid #ccc; border-radius: 4px;}
+    .border_radius_50{border-radius: 50%;}
+    .width-200{ width:200px !important;}
+    .top_20{top:20px !important;}
+    .color_grey{ color: #999;}
+    .margin-bottom-5{margin-bottom: 5px !important;}
+    .img_size_14{ width: 14px !important; height: 14px !important;}
+    .img_size_50{ width: 50px !important; height: 50px !important;}
+    .height_60{height: 60px;}
+</style>
+<body class="action-sheet-options">
+<div class="bar bar-header bar-positive">
+    <h1 class="title">bar-positive</h1>
+</div>
+<div class="scroll-content has-header">
+    <div class="list">
+        <div class="item item-input-wrapper bar-ligh tabs-striped">
+            <input class="input_border" type="text" placeholder="输入榜单名称">
+        </div>
+        <!--<div class="item row item-input-wrapper">-->
+            <!--<div class="col-33 padding-left color_grey">-->
+                <!--排序方式：-->
+            <!--</div>-->
+            <!--<div class="col-67">-->
+            <!--<select class="width-200 color-blue">-->
+                <!--<option>顺序</option>-->
+                <!--<option>大小</option>-->
+                <!--<option>时间</option>-->
+            <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="item item-input item-select">
+            <div class="input-label">
+                排序方式
+            </div>
+            <select>
+                <option>顺序</option>
+                <option selected="">时间</option>
+                <option>名称</option>
+            </select>
+        </div>
+    </div>
+    <div class="list">
+        <div class="item item-input margin-bottom-5 height_60">
+            <div class="col-50 col-center">
+                <img class="img_size_50" src="../images/bang_03.jpg">
+                <span style="line-height: 50px;">张三三</span>
+            </div>
+            <div class="col-50 item-icon-right item-input">
+                <input type="text" class="input_border">
+                <i class="ion ion-ios-close-empty"></i>
+            </div>
+        </div>
+        <button style=" margin: 10px 0 0 0;" class="button button-full button-positive">
+            +添加队员
+        </button>
+    </div>
+</div>
+</body>
+</html>

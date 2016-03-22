@@ -1,0 +1,55 @@
+<div class="login">
+	<div class="modal">
+		<ion-content scroll="false">
+
+			<div class="buttons header-item login-close" on-touch="loginModal.hide();">
+				<i class="icon ion-ios-close-empty"></i>
+			</div>
+			<div class="tabs tabs-top tabs-striped tabs-color-light">
+				<div class="tab-item" ng-class="{'active':login.type==1}" on-touch="login.type=1">
+					登录
+				</div>
+				<div class="tab-item" ng-class="{'active':login.type==2}" on-touch="login.type=2">
+					手机注册
+				</div>
+			</div>
+
+			<div class="list" ng-if="login.type==1">
+				<div class="item item-input-wrapper">
+					<i class="icon icon-people placeholder-icon"></i>
+					<input type="tel" placeholder="手机号码" pattern="[0-9]*" ng-model="login.phone" maxlength="11">
+				</div>
+
+				<div class="item item-input-wrapper" >
+					<i class="icon icon-mima placeholder-icon"></i>
+					<input type="password" placeholder="密码" ng-model="login.password">
+				</div>
+				<div class="item login-btn" on-touch="loginAction()">
+					登陆
+				</div>
+				<span class="other">---免注册登陆方式---</span>
+				<div class="wechat" ng-click="wechatLogin()"></div>
+			</div>
+			<div class="list" ng-if="login.type==2">
+				<div class="item item-input-wrapper">
+					<i class="icon icon-login-phone placeholder-icon"></i>
+					<input type="tel" placeholder="手机号码" pattern="[0-9]*" ng-model="login.phone" maxlength="11" ng-change="validatePhone(login.phone)">
+					<span class="sms sms-active" on-touch="sendSms()" ng-if="login.isCanSms">获取验证码</span>
+					<span class="sms" ng-if="!login.isCanSms&&!isTime">获取验证码</span>
+					<span class="sms" ng-if="!login.isCanSms&&isTime" ><b ng-bind="countdown">60</b>秒后重新获取</span>
+				</div>
+				<div class="item item-input-wrapper">
+					<i class="icon icon-login-sms placeholder-icon"></i>
+					<input type="tel" id="sms" placeholder="短信验证码" ng-model="login.code" maxlength="4" pattern="[0-9]*">
+				</div>
+				<div class="item item-input-wrapper" >
+					<i class="icon icon-mima placeholder-icon"></i>
+					<input type="password" placeholder="密码" ng-model="login.password">
+				</div>
+				<div class="item login-btn" on-touch="registerAction()">
+					注册
+				</div>
+			</div>
+		</ion-content>
+	</div>
+</div>

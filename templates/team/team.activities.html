@@ -1,0 +1,34 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.detail()">
+      <button class="button button-clear icon ion-ios-arrow-left">球队</button>
+    </div>
+    <h1 class="title" >球队活动</h1>
+    <div class="buttons buttons-right header-item" on-touch="createActivity()" ng-if="teamInfo.priv>2">
+      <button class="button button-clear icon ion-ios-plus-outline"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header activity">
+
+    <ion-refresher pulling-text="下拉可以刷新" on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item class="item-avatar-left item-activity item-icon-right" collection-repeat="activity in activities" type="item-text-wrap" ui-sref="activity.detail({activity_id:activity.activity_id})">
+        <img reset-img ng-src="{{activity.uavatar|imgFilter:200}}">
+        <h3><span ng-bind="activity.title"></span></h3><span class="baomingzhong" ng-bind="activity.status_str">报名中</span>
+        <p class="activity-size">
+          <span ng-bind="activity.address"></span>&nbsp;|
+          <span ng-bind="activity.num"></span>&nbsp;|
+          <span ng-bind="activity.fee" ></span>
+        </p>
+        <p class="activity-size">
+          活动时间：<span ng-bind="activity.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span>&nbsp;
+        </p>
+        <i class="icon ion-chevron-right icon-accessory" ></i>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

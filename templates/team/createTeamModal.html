@@ -1,0 +1,46 @@
+<div class="modal">
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button  class="button button-clear" ng-click="createTeamModal.hide()">取消</button>
+		</div>
+		<h1 class="title">创建球队</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="sumbitCreateTeam(citydata)">确定</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-scroll class="has-header" style="display: inline;">
+
+			<div class="list">
+				<label class="item item-input item-avatar-right ">
+					<img ng-src="{{createTeamInfo.uploadAvatarImg}}">
+					<span class="input-label">球队头像:</span>
+					<input class="input_uploadAvatar"  ngf-select="upload($file)" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" type="file" >
+				</label>
+
+				<label class="item item-input item-icon-right">
+					<span class="input-label">球队类型:</span>
+					<input class="background-fff" ng-click="showTypePopup()" disabled type="text" ng-model="createTeamInfo.teamTypeName" placeholder="请选择球队类型">
+					<i class="icon ion-chevron-right icon-accessory" on-touch="showTypePopup()"></i>
+				</label>
+
+				<label class="item item-input">
+					<span class="input-label">球队名称:</span>
+					<input type="text" ng-model="createTeamInfo.teamName" placeholder="请输入球队名称(最多15个汉字)">
+				</label>
+				<div class="item item-input row" style="padding: 0px 15px;">
+					<span class="input-label">球队地点：</span>
+					<select class="col common-select" ng-model="createTeamInfo.province" ng-options="province.name for province in provinceData"></select>
+					<select class="col common-select" ng-model="createTeamInfo.city" ng-options="city.name for city in cityData" ></select>
+					<select class="col common-select" ng-model="createTeamInfo.district" ng-options="district.name for district in districtData" ></select>
+				</div>
+			</div>
+			<div class="list">
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">球队介绍</span>
+					<textarea class="no-resize"  rows="8" placeholder="请输入球队的简介" ng-model="createTeamInfo.content"></textarea>
+				</label>
+			</div>
+	</ion-scroll>
+
+</div>

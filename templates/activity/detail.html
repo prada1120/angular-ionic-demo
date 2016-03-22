@@ -1,0 +1,52 @@
+<ion-view on-finish-render>
+
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="activityList()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title" ng-bind="activity.title"></h1>
+    <div class="buttons buttons-right header-item" ng-if="activity.is_priv" on-touch="showDetailOpt($event)">
+      <button class="button button-clear icon ion-navicon" ></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header has-footer">
+    <div class="wrap">
+      <div class="jbkq_top_text dibu_xt">
+        <h3 class="yjhd_bottom_biaoti" ><span class="text_color_blue_icon">[<span ng-bind="activity.project_name"></span>]</span><span ng-bind="activity.title"></span></h3>
+        <p class="topiaosj">活动时间：<span ng-bind="activity.open_time*1000|date : 'yyyy-MM-dd HH:mm'"></span></p>
+        <p class="topiaosj">报名截止时间：<span ng-bind="activity.deadline*1000|date : 'yyyy-MM-dd HH:mm'"></span></p>
+        <p ng-if="activity.type==1">发起者：<span class="xingming" ui-sref="member.info({member_id:activity.uid})" ng-bind="activity.uname"></span></p>
+        <p ng-if="activity.type==2">发起者：<span class="xingming" ui-sref="team.detail({team_id:activity.uid})" ng-bind="activity.uname"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt">
+        <p class="topiaosj">活动地点：<span ng-bind="activity.address"></span></p>
+        <p class="topiaosj">活动费用：<span ng-bind="activity.fee"></span></p>
+        <p class="topiaosj">活动详情：<span ng-bind="activity.description"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt invite_members">
+        <h3 class="cydr text_color_blue_icon">已通过报名 ( <b ng-bind="passed_count"></b> )</h3>
+        <ul>
+          <li ng-repeat="member in passed" >
+            <P><img class="avatar_img-54 margin-left-10" ui-sref="member.info({member_id:member.uid})" ng-src="{{member.uavatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+        <h3 class="cydr text_color_blue_icon">未通过报名 ( <b ng-bind="no_passed_count"></b> )</h3>
+        <ul>
+          <li ng-repeat="member in no_passed" >
+            <P><img class="avatar_img-54 margin-left-10" ui-sref="member.info({member_id:member.uid})" ng-src="{{member.uavatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+        <h3 class="cydr text_color_blue_icon">待审核报名 ( <b ng-bind="wait_count"></b> )</h3>
+        <ul>
+          <li ng-repeat="member in wait" >
+            <P><img class="avatar_img-54 margin-left-10" ui-sref="member.info({member_id:member.uid})" ng-src="{{member.uavatar|imgFilter:100}}"></P>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer dibu">
+    <button ng-if="activity.is_sign||activity.status>0" class="btn-disabled" >我要参加</button>
+    <button ng-if="!activity.is_sign&&activity.status==0" ng-click="sign()">我要参加</button>
+  </div>
+</ion-view>

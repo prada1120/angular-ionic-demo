@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="letu" load-weixin>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta charset="utf-8">
+        <link href="css/common.css" rel="stylesheet" type="text/css">
+        <link href="css/ng-animation.css" rel="stylesheet" type="text/css">
+        <link href="css/ball-clip-rotate.min.css" rel="stylesheet" type="text/css">
+        <link href="//at.alicdn.com/t/font_1447380281_6149611.css" rel="stylesheet">
+        <!--<script src="js/zepto.min.js"></script>-->
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="lib/angular-1.4.6.min.js"></script>
+        <script src="lib/angular-ui-router.min.js"></script>
+        <script src="lib/angular-animate.min.js"></script>
+        <script src="js/iscroll.js"></script>
+        <script src="lib/ng-iscroll.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/match/match.js"></script>
+        <script src="js/layer.m/layer.m.js"></script>
+        <script src="js/jweixin-1.0.0.js"></script>
+        <!--<script src="js/swiper.3.1.2.min.js"></script>-->
+        <script src="js/swiper.3.1.7.jquery.min.js"></script>
+
+        <script src="js/letu.js"></script>
+
+        <title>乐土赛事</title>
+    </head>
+    <body>
+        <div ui-view  class="app-body" >
+
+        </div>
+        <!--<pre>-->
+          <!--$state = {{$state.current.name}}-->
+          <!--$stateParams = {{$stateParams}}-->
+          <!--$state full url = {{ $state.$current.url.source }}-->
+        <!--</pre>-->
+    </body>
+    <div id="loading" ng-show="$loading">
+            <div class="la-ball-clip-rotate">
+                <div></div>
+                <span >加载中...</span>
+            </div>
+    </div>
+
+</html>
+
+

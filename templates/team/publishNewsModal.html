@@ -1,0 +1,36 @@
+<div class="modal">
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="publishNewsModal.hide()">取消</button>
+		</div>
+		<h1 class="title">发布短动态</h1>
+		<div class="buttons">
+			<button class="button button-clear" ng-click="edit()" ng-disabled="publishNewsModalParams.content==''||!publishNewsModalParams.ischange">发布</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-scroll class="new-topics" style="display: inline;">
+		<div class="padding">
+			<div class="list">
+				<label class="item item-input" >
+					<textarea id="text" class="no-resize" rows="12" ng-trim  ng-change="publishNewsModalParams.ischange=true"  ng-model="publishNewsModalParams.content"></textarea>
+				</label>
+			</div>
+			<ul class="xiangce_lb_img">
+				<li>
+					<img src="images/xiance_tj_an.png">
+					<input type="file" ngf-select="uploadFiles($files)" multiple="multiple" ng-model="file"  ngf-pattern="'image/*'" accept="image/*" >
+				</li>
+				<li ng-repeat="img in publishNewsModalParams.upload_imgs">
+					<img ng-src="{{img|imgFilter:300}}">
+					<div class="xiance_gb_an">
+						<img src="images/xiance_gb_an.png" on-touch="removeImg(img,$index)" width="17" height="17">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</ion-scroll>
+
+	</ion-content>
+
+</div>

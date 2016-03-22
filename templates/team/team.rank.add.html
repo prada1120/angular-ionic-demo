@@ -1,0 +1,43 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item" ui-sref="team.ranks()">
+      <button class="button button-clear icon ion-ios-arrow-left">榜单</button>
+    </div>
+    <h1 class="title">球队榜单</h1>
+    <div class="buttons buttons-right header-item">
+      <button class="button button-clear icon" ng-disabled="rank.name==''" ng-click="submit()">完成</button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <div class="list">
+      <div class="item item-input-wrapper">
+        <input class="input_border" type="text" placeholder="输入榜单名称" ng-model="rank.name" ng-trim ng-change="rank.ischange=true">
+      </div>
+      <div class="item  item-input ">
+        <span class="input-label">分值名称：</span>
+        <input class="input_border" type="text" placeholder="输入榜单分值名称" ng-model="rank.value_title" ng-trim ng-change="rank.ischange=true">
+      </div>
+      <div class="item item-input item-select">
+        <div class="input-label">
+          排序方式
+        </div>
+        <select ng-change="sortChange(rank.sort)" ng-model="rank.sort">
+          <option value="2">默认</option>
+          <option value="1">降序</option>
+          <option value="0">升序</option>
+        </select>
+      </div>
+    </div>
+    <div class="list rank_item">
+      <ion-item class="item-input item-avatar item-icon-right" collection-repeat="item in items | orderBy:sort:order" type="item-text-wrap">
+        <img ng-src="{{item.avatar|imgFilter:100}}" >
+        <h3 ng-bind="item.uname"></h3>
+        <input class="input_border" ng-model="item.score" type="tel" maxlength="4" pattern="[0-9]*">
+        <i class="icon ion-ios-close-outline text_color_red" on-touch="removeItem($index)"></i>
+      </ion-item>
+    </div>
+    <button class="button button-full button-positive ion-ios-plus" on-touch="addItem();">
+      新增成员
+    </button>
+</ion-view>

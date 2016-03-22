@@ -1,0 +1,27 @@
+<div class="modal">
+
+	<ion-header-bar class="bar-blue">
+		<div class="buttons">
+			<button side="left" class="button button-clear" ng-click="editModal.hide()">取消</button>
+		</div>
+
+		<h1 class="title" ng-bind="editModalParams.title">修改内容</h1>
+
+		<div class="buttons">
+			<button class="button button-clear" ng-click="edit()">完成</button>
+		</div>
+	</ion-header-bar>
+
+	<ion-scroll class="has-header" style="display: inline;">
+
+		<div class="padding">
+			<div class="list">
+				<label class="item item-input" >
+					<textarea id="text" class="no-resize" rows="12" ng-model="editModalParams.content"></textarea>
+				</label>
+			</div>
+		</div>
+
+	</ion-scroll>
+
+</div>

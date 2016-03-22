@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>乐土体育</title>
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <!--<script src="js/debuggap.js" type="text/javascript"></script>-->
+    <!--<link href="cdn.bootcss.com/ionic/1.1.0/css/ionic.min.css" rel="stylesheet">-->
+    <link href="lib/ionic-picker-city/css/ionic-picker-city.css" rel="stylesheet">
+    <link href="//at.alicdn.com/t/font_1451022238_7623334.css"  rel="stylesheet" type="text/css">
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet">
+
+
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <!--<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>-->
+    <!--<script src="js/zepto.min.js"></script>-->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <!--<script src="http://cdn.bootcss.com/ionic/1.1.0/js/ionic.bundle.min.js"></script>-->
+
+    <script src="lib/moment/min/moment-with-locales.js"></script>
+    <!--<script src="http://cdn.bootcss.com/angular-moment/0.10.3/angular-moment.min.js"></script>-->
+    <script src="lib/angular-moment/angular-moment.min.js"></script>
+    <!-- cityPicker -->
+    <!--<script src="lib/ionic-picker-city/ionic-picker-city.js"></script>-->
+    <!--<script src="lib/ionic-picker-city/ionic-picker-city-data.js"></script>-->
+    <!-- datePicker -->
+    <!--<script src="lib/ionic-picker-time/ionic-picker-time.js"></script>-->
+    <!-- sliderBox -->
+    <script src="lib/ionic-slide-box/tabSlideBox.js"></script>
+
+    <link href="lib/ionic-slide-box/tabSlideBox.css" rel="stylesheet" type="text/css">
+
+    <!--<script src="lib/angular-elastic/elastic.js"></script>-->
+
+    <!-- ionic plugin -->
+    <!--<script src="lib/ionic-plugin/ionic-image-lazy-load.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+
+    <!-- your app's js -->
+    <!--<script src="js/layer.m/layer.m.js"></script>-->
+    <script src="http://apps.bdimg.com/libs/layer.m/1.5/layer.m.js"></script>
+    <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+
+    <script src="js/jweixin-1.0.0.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="templates/home/home.js"></script>
+    <script src="templates/team/team.js"></script>
+    <script src="templates/invite/invite.js"></script>
+    <script src="templates/article/article.js"></script>
+    <script src="templates/vote/vote.js"></script>
+    <script src="templates/live/live.js"></script>
+    <script src="templates/activity/activity.js"></script>
+    <script src="templates/find/find.js"></script>
+    <script src="templates/buy/buy.js"></script>
+    <script src="templates/user/user.js"></script>
+    <script src="templates/member/member.js"></script>
+    <script src="lib/ng-file-upload.min.js"></script>
+    <script src="lib/ngIOS9UIWebViewPatch.js"></script>
+    <script src="lib/dist/templates.min.js"></script>
+    <!--<script src="lib/dist/ionic-datepicker.min.js"></script>-->
+    <link href="lib/dist/style.css" rel="stylesheet">
+
+    <!-- 抽奖页 滚屏 -->
+    <script src="js/scroll.js"></script>
+
+
+
+
+
+  </head>
+  <body ng-app="starter" load-weixin>
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <!--<ion-nav-bar class="bar-blue">-->
+
+    <!--</ion-nav-bar>-->
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view ></ion-nav-view>
+  </body>
+</html>
+<script>
+document.addEventListener('touchmove',function(event){
+    event.preventDefault();
+},false);
+</script>
+

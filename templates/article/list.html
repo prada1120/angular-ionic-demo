@@ -1,0 +1,55 @@
+<ion-view on-finish-render title="约战">
+  <ion-side-menus>
+    <ion-side-menu-content>
+      <ion-header-bar class="bar-blue">
+        <div class="buttons buttons-left header-item"  ui-sref="tab.find()">
+          <button class="button button-clear icon ion-ios-arrow-left"></button>
+        </div>
+        <h1 class="title">资讯</h1>
+        <div class="buttons buttons-right header-item" >
+          <button class="button button-clear button-icon icon icon-caidan" menu-toggle="right"></button>
+        </div>
+      </ion-header-bar>
+      <ion-content class="has-header">
+
+        <ion-refresher pulling-text="下拉可以刷新" on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-list>
+          <div class="card" ng-repeat="article in articles" ui-sref="articleDetail({id:article.id})">
+            <div class="item item-body ">
+              <h3 class="no-margin" ng-bind="article.title"></h3>
+              <span class="text_color_grey_12" am-time-ago="article.time*1000"></span>
+              <img class="full-image article_thumb" ng-src="{{article.thumb|imgFilter:500}}">
+              <p class="no-margin" ng-bind="article.description"></p>
+            </div>
+          </div>
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage">
+        </ion-infinite-scroll>
+      </ion-content>
+    </ion-side-menu-content>
+    <ion-side-menu side="right">
+      <header class="bar bar-header bar-stable">
+        <div class="buttons buttons-left header-item" menu-toggle="right">
+          <button class="button button-clear text_color_grey">取消</button>
+        </div>
+        <h1 class="title">筛选</h1>
+        <div class="buttons buttons-right header-item" on-touch="search()" menu-close>
+          <button class="button button-clear text_color_grey">确定</button>
+        </div>
+      </header>
+      <ion-content class="has-header">
+        <div class="lists">
+          <div class="item">
+            <span style="float: left">项目</span>
+            <div class="menu-tabs">
+              <span ng-repeat="tab in tabs" on-touch="selectTab(tab)" ng-class="{'ion-android-done':tab.value==path.project,'active':tab.value==path.project}"  ng-bind="tab.lab"></span>
+            </div>
+          </div>
+          <div class="item-divider-sm"></div>
+        </div>
+      </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>
+</ion-view>
+

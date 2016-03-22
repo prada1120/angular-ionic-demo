@@ -1,0 +1,64 @@
+<ion-view on-finish-render>
+  <ion-header-bar class="bar-blue">
+    <div class="buttons buttons-left header-item"  ui-sref="voteList()">
+      <button class="button button-clear icon ion-ios-arrow-left"></button>
+    </div>
+    <h1 class="title">有奖互动</h1>
+    <div class="buttons buttons-right header-item" ng-if="invite.is_priv" on-touch="showDetailOpt($event)">
+      <button class="button button-clear icon ion-navicon"></button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header has-footer">
+    <div class="wrap">
+      <P>
+        <img ng-src="{{vote.thumb|imgFilter:500}}">
+      </P>
+      <div class="jbkq_top_text dibu_xt">
+        <h3 class="yjhd_bottom_biaoti" ng-bind="vote.title"></h3>
+        <p class="topiaosj">活动时间: <span ng-bind="vote.time*1000|date : 'yyyy-MM-dd'"></span>~<span ng-bind="vote.deadline*1000|date : 'yyyy-MM-dd'"></span></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt">
+        <h3 class="yjhd_title">活动介绍</h3>
+        <p class="huodong_js" ng-bind-html="vote.content|trustHtml"></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt" ng-if="vote.prize_id!=0">
+        <h3 class="yjhd_title">抽奖说明</h3>
+        <p class="huodong_js">参与“<span ng-bind="vote.title"></span>”投票活动，您将有机会参与“<span ng-bind="vote.prize_name"></span>”抽奖</p>
+        <p ng-if="vote.is_voted">您目前还有<b class="text_color_blue_icon" ng-bind="vote.lottery_num"></b>次抽奖机会，<b class="text_color_blue_icon" ui-sref="vote.award({prize_id:vote.prize_id})">立即抽奖</b></p>
+      </div>
+      <div class="jbkq_top_text dibu_xt" ng-if="!vote.is_voted">
+        <h3 class="yjhd_title">投票</h3>
+        <div class="vote" ng-repeat="question in vote.questions">
+          <p><span ng-bind="$index+1"></span>.<span ng-bind="question.title"></span></p>
+          <div class="vote_list" ng-repeat="option in question.options" ng-click="onTapSelect(option,question)">
+            <p class="vote_process" ui-sref="vote.voted({'option_id':option.option_id})" ><span class="text_color_blue_icon vote_has_vote">谁投了ta？</span></p>
+            <i class="iconfont" ng-class="{'icon-xuanzhong':question.is_checkbox==0,'icon-lvkuangduihao':question.is_checkbox==1,'i_active':option.is_check}"></i>
+            <img ng-if="option.img!=''" ng-src="{{option.img|imgFilter:500}}" height="75" width="75">
+            <span ng-bind="option.title"></span>
+          </div>
+        </div>
+      </div>
+      <div class="jbkq_top_text dibu_xt" ng-if="vote.is_voted">
+        <h3 class="yjhd_title">投票</h3>
+        <div class="vote" ng-repeat="question in vote.questions">
+          <p ><span ng-bind="$index+1"></span>.<span ng-bind="question.title"></span></p>
+          <div class="vote_list" ng-repeat="option in question.options" ng-click="onTapSelect(option,question)">
+            <p class="vote_process" ui-sref="vote.voted({'option_id':option.option_id})" ><span class="text_color_blue_icon vote_has_vote">谁投了ta？</span></p>
+            <img ng-if="option.img!=''" ng-src="{{option.img|imgFilter:500}}" height="75" width="75">
+            <span ng-bind="option.title"></span>
+            <p class="vote_process">
+              <span ng-bind="option.total"></span>票
+              <span ng-bind="option.total/question.total*100|number:0"></span>%
+            </p>
+            <div class="vote_plan" >
+              <div class="vote_plan_color" style="width: {{option.total/question.total*100|number:0}}%" ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer dibu">
+    <button ng-class="{'btn-disabled':vote.is_voted}" ng-click="addVote()">投票</button>
+  </div>
+</ion-view>
